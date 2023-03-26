@@ -15,11 +15,11 @@
 					<form:form name="header" action="${pageContext.request.contextPath}/logout">
 					<ul class="nav nav-pills nav-justified">
 						<li role="presentation"><a href="${pageContext.request.contextPath}/top"><span class="header-menu">トップ</span></a></li>
-						<sec:authorize access="hasAnyRole('SA', 'CS')">
+						<sec:authorize access="hasAnyRole('1000', '2000')">
 							<li role="presentation"><a href="${pageContext.request.contextPath}/application/create-sa/input"><span class="header-menu">新規申請</span></a></li>
 							<li role="presentation"><a href="${pageContext.request.contextPath}/application/search-sa"><span class="header-menu">照会・変更申請</span></a></li>
 						</sec:authorize>
-						<sec:authorize access="hasRole('CR')">
+						<sec:authorize access="hasRole('1000')">
 							<li role="presentation"><a href="${pageContext.request.contextPath}/application/search-cr"><span class="header-menu">判定</span></a></li>
 						</sec:authorize>
 						<li role="presentation"><a href="javascript:header.submit();"><span class="header-menu">ログアウト</span></a></li>

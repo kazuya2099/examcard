@@ -27,26 +27,23 @@
 			e.MEI,
 			e.SEI_KANA,
 			e.MEI_KANA,
-			e.DEPARTMENT_ID,
+			e.DEP_ID,
 			e.LOGIN_LAST_DATE,
 			e.LOGIN_PASSWORD,
 			r.ROLE_ID,
-			d.DEPARTMENT_NAME
+			d.DEP_NAME
 		from
 			employee e
 		inner join
 			employee_role r
 		on
-			e.ID = r.EMPLOYEE_ID
+			e.ID = r.EMP_ID
 		inner join
 			department d
 		on
-			e.DEPARTMENT_ID = d.ID
+			e.DEP_ID = d.ID
 		where
 			e.ID = #{id}
-			and e.delete_flag = '0'
-			and r.delete_flag = '0'
-			and d.delete_flag = '0'
 	</select>
 
 	<select id="selectUserById" parameterType="java.lang.String" resultMap="userMap">
@@ -63,6 +60,5 @@
 			employee
 		where
 			id = #{id}
-			and delete_flag = '0'
 	</select>
 </mapper>

@@ -21,19 +21,11 @@
 			,message
 			,start_date
 			,end_date
-			,create_date
-			,create_user
-			,update_date
-			,update_user
-			,delete_date
-			,delete_user
-			,delete_flag
 		from
 			information
 		where
 			start_date <= #{systemDate}
 			and #{systemDate} <= end_date
-			and delete_flag = '0'
 	]]>
 	</select>
 </mapper>
