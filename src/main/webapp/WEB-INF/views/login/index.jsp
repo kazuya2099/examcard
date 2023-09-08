@@ -4,7 +4,6 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="/tld/customtag" prefix="cus"%>
 <html>
 <head>
 <jsp:include page="../common/head.jsp" flush="true" />
@@ -19,7 +18,7 @@
 			</div>
 			<div class="col-sm-8">
 				<div class="header-contents">
-					<form:form action="${pageContext.request.contextPath}/login/login" modelAttribute="loginForm">
+					<form:form action="${pageContext.request.contextPath}/login/execute" modelAttribute="loginForm">
 						<div class="login-contents">
 							<table>
 							<tr>

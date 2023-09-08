@@ -14,9 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.examcard.component.authentication.UserDetailsImpl;
-import com.examcard.dao.common.User;
-import com.examcard.dao.common.UserDao;
 import com.examcard.dto.common.UserDto;
+import com.examcard.repository.common.User;
+import com.examcard.repository.common.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -24,11 +24,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private static final String ROLE_PREFIX = "ROLE_";
 
 	@Autowired
-	private UserDao userDao;
+	private UserRepository userRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		List<User> list = userDao.selectUser(username);
+		List<User> list = userRepository.selectUser(username);
 		if (list == null) {
 			throw new UsernameNotFoundException(username + " is not exists!");
 		}

@@ -7,10 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.examcard.component.authentication.AuthenticationUtil;
 import com.examcard.constant.ApplicationStatus;
-import com.examcard.dao.application.CustomerApplication;
-import com.examcard.dao.application.CustomerApplicationDao;
 import com.examcard.dto.common.UserDto;
 import com.examcard.dto.customer.sales.ApplicationDto;
+import com.examcard.repository.application.CustomerApplication;
+import com.examcard.repository.application.CustomerApplicationRepository;
 import com.examcard.service.common.SequenceService;
 import com.examcard.service.customer.AbstractCustomerService;
 import com.examcard.service.customer.CommonCustomerService;
@@ -21,7 +21,7 @@ import com.examcard.util.common.OperationDateUtil;
 public class RegistCustomerApplicationService extends AbstractCustomerService {
 
 	@Autowired
-	private CustomerApplicationDao customerApplicationDao;
+	private CustomerApplicationRepository customerApplicationRepository;
 	
 	@Autowired
 	private SequenceService sequenceService;
@@ -40,7 +40,7 @@ public class RegistCustomerApplicationService extends AbstractCustomerService {
 		customerApplication.setUpdateDate(OperationDateUtil.getDate());
 		customerApplication.setUpdateUser(userDto.getId());
 		customerApplication.setApplicationStatus(ApplicationStatus.APPLICATION.getCode());
-		customerApplicationDao.insert(customerApplication);
+		customerApplicationRepository.insert(customerApplication);
 	}
 	
 	public ApplicationDto getApplication(String id) {

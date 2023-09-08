@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.examcard.repository.common.UserRepository">
+
+	<resultMap id="userMap" type="com.examcard.repository.common.User">
+		<result property="firstname" column="SEI" />
+		<result property="lastname" column="MEI" />
+		<result property="lastnameKana" column="MEI_KANA" />
+		<result property="firstnameKana" column="SEI_KANA" />
+		<result property="mDepartmentId" column="DEPARTMENT_ID" />
+		<result property="departmentName" column="DEPARTMENT_NAME" />
+		<result property="role" column="ROLE_ID" />
+		<result property="password" column="LOGIN_PASSWORD" />
+		<result property="createDate" column="create_date" />
+		<result property="createUser" column="create_user" />
+		<result property="updateDate" column="update_date" />
+		<result property="updateUser" column="update_user" />
+		<result property="deleteDate" column="delete_date" />
+		<result property="deleteUser" column="delete_user" />
+		<result property="deleteFlag" column="delete_flg" />
+	</resultMap>
+
+	<select id="selectUser" parameterType="java.lang.String" resultMap="userMap">
+		select
+			e.ID,
+			e.SEI,
+			e.MEI,
+			e.SEI_KANA,
+			e.MEI_KANA,
+			e.DEP_ID,
+			e.LOGIN_LAST_DATE,
+			e.LOGIN_PASSWORD,
+			r.ROLE_ID,
+			d.DEP_NAME
+		from
+			employee e
+		inner join
+			employee_role r
+		on
+			e.ID = r.EMP_ID
+		inner join
+			department d
+		on
+			e.DEP_ID = d.ID
+		where
+			e.ID = #{id}
+	</select>
+
+	<select id="selectUserById" parameterType="java.lang.String" resultMap="userMap">
+		select
+			e.ID,
+			e.SEI,
+			e.MEI,
+			e.SEI_KANA,
+			e.MEI_KANA,
+			e.DEPARTMENT_ID,
+			e.LOGIN_LAST_DATE,
+			e.LOGIN_PASSWORD
+		from
+			employee
+		where
+			id = #{id}
+	</select>
+</mapper>

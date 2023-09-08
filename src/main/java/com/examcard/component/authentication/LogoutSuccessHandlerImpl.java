@@ -2,10 +2,6 @@ package com.examcard.component.authentication;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.jboss.logging.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AbstractAuthenticationTargetUrlRequestHandler;
@@ -16,10 +12,9 @@ public class LogoutSuccessHandlerImpl extends AbstractAuthenticationTargetUrlReq
 	Logger logger = Logger.getLogger(LogoutSuccessHandlerImpl.class);
 
 	@Override
-	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-			throws IOException, ServletException {
-		// TODO
-		// セッションが削除されたあとに呼ばれるため、ログインIDが取得できない。
+	public void onLogoutSuccess(jakarta.servlet.http.HttpServletRequest request,
+			jakarta.servlet.http.HttpServletResponse response, Authentication authentication)
+			throws IOException, jakarta.servlet.ServletException {
 		logger.info("ログアウトに成功しました。");
 		super.handle(request, response, authentication);
 	}

@@ -1,31 +1,32 @@
 package com.examcard.service.top;
 
-import java.util.Date;
+import java.util.List;
 
-import com.examcard.dao.top.Point;
-import com.examcard.dao.top.UserCard;
-import com.examcard.dao.top.UserCardDao;
-import com.examcard.dto.top.TopDto;
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.examcard.component.common.CodeList;
+import com.examcard.dto.common.InformationDto;
+import com.examcard.dto.top.TopDto;
+import com.examcard.service.common.InformationService;
 
 @Service
 public class TopService {
 
 	@Autowired
-	private UserCardDao userCardDao;
-
-	public TopDto getTopData(String userId) {
-		UserCard userCardInfo = userCardDao.selectByUserId(userId);
-
-		Point point = new Point();
-		point.setUserId(userId);
-		point.setSystemDate(new Date());
+	private InformationService informationService;
+	
+	@Autowired
+	public CodeList codeList;
+	
+	public TopDto getTopData() {
 		TopDto topDto = new TopDto();
-		BeanUtils.copyProperties(userCardInfo, topDto);
-
+		List<InformationDto> informationDtoList = informationService.getInformation();
+		if (informationDtoList.size() > 0) {
+			String topInformation = informationDtoList.get(0).getMessage();
+			topInformation = topInformation.replace("\r\n", "<br>");
+			topDto.setInformation(topInformation);
+		}
 		return topDto;
 	}
 }

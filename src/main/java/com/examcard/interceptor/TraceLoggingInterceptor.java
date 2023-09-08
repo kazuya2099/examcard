@@ -2,32 +2,31 @@ package com.examcard.interceptor;
 
 import java.lang.reflect.Method;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.lang.Nullable;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class TraceLoggingInterceptor extends HandlerInterceptorAdapter {
+public class TraceLoggingInterceptor implements WebRequestInterceptor {
 
 	private static final Log logger = LogFactory.getLog(TraceLoggingInterceptor.class);
-
+	
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		String methodName = getMethodName(handler);
+	public void preHandle(WebRequest paramWebRequest) throws Exception {
+		String methodName = getMethodName(paramWebRequest);
 		logger.info(methodName + " : 開始");
-		return true;
 	}
-
+	
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			@Nullable ModelAndView modelAndView) {
-		String methodName = getMethodName(handler);
+	public void postHandle(WebRequest paramWebRequest, ModelMap paramModelMap) throws Exception {
+		String methodName = getMethodName(paramWebRequest);
 		logger.info(methodName + " : 終了");
+	}
+	
+	@Override
+	public void afterCompletion(WebRequest paramWebRequest, Exception paramException) throws Exception {
 	}
 
 	private String getMethodName(Object handler) {

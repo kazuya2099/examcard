@@ -2,6 +2,7 @@ package com.examcard.controller.login;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -17,7 +18,7 @@ public class LoginContoller {
 		return "login/index";
 	}
 
-	@RequestMapping(value = {"/login/error"})
+	@PostMapping({"/login/error"})
 	public String error(Model model, LoginForm loginForm) {
 		model.addAttribute(loginForm);
 		return "login/error";
