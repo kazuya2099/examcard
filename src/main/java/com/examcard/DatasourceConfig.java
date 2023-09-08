@@ -1,5 +1,7 @@
 package com.examcard;
 
+import java.io.IOException;
+
 import javax.sql.DataSource;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -8,7 +10,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -17,52 +19,44 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan("com.example.spring_boot.dao")
+@MapperScan("com.examcard.repository")
 public class DatasourceConfig {
 
 	@Bean
-	public DataSource dataSource() {
+	DataSource dataSource() {
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-		driverManagerDataSource.setDriverClassName(com.mysql.jdbc.Driver.class.getName());
-		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/examcard?autoReconnect=true&useSSL=false");
-		driverManagerDataSource.setUsername("examcard");
+		driverManagerDataSource.setDriverClassName(oracle.jdbc.driver.OracleDriver.class.getName());
+		driverManagerDataSource.setUrl("jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=DESKTOP-ITP21F1)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=EXAMCARD)))");
+		driverManagerDataSource.setUsername("EXAMCARD");
 		driverManagerDataSource.setPassword("password");
 		return driverManagerDataSource;
 	}
 
 	@Bean
-	public PlatformTransactionManager transactionManager() {
+	PlatformTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
 	}
 
 	@Bean
-	public JdbcTemplate jdbcTemplate() {
+	JdbcTemplate jdbcTemplate() {
 		return new JdbcTemplate(dataSource());
 	}
 
 	@Bean
-	public SqlSessionFactoryBean sessionFactory() {
-		Resource[] mapperLocations = {
-				new ClassPathResource("/sql/common/userDao.xml"),
-				new ClassPathResource("/sql/common/informationDao.xml"),
-				new ClassPathResource("/sql/common/sequenceDao.xml"),
-				new ClassPathResource("/sql/application/customerApplicationDao.xml"),
-				new ClassPathResource("/sql/top/userCardDao.xml"),
-				new ClassPathResource("/sql/top/pointDao.xml"),
-		};
-
+	SqlSessionFactoryBean sessionFactory() throws IOException {
+		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource());
 		bean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
-		bean.setMapperLocations(mapperLocations);
+		bean.setMapperLocations(resolver.getResources("classpath:sql/**/*.xml"));
 		return bean;
 	}
 
 	@Bean
-	public SqlSessionTemplate sqlSession(SqlSessionFactoryBean sessionFactory) {
-		SqlSessionTemplate bean= null;
+	SqlSessionTemplate sqlSession() {
+		SqlSessionTemplate bean = null;
 		try {
-			bean = new SqlSessionTemplate(sessionFactory.getObject());
+			bean = new SqlSessionTemplate(sessionFactory().getObject());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

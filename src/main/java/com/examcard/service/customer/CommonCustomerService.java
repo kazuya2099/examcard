@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.examcard.component.common.CodeList;
 import com.examcard.constant.CodeMapKey;
-import com.examcard.dao.application.CustomerApplication;
-import com.examcard.dao.application.CustomerApplicationDao;
 import com.examcard.dto.customer.sales.ApplicationDto;
+import com.examcard.repository.application.CustomerApplication;
+import com.examcard.repository.application.CustomerApplicationRepository;
 
 @Service
 @Transactional
@@ -21,7 +21,7 @@ public class CommonCustomerService {
 	private CodeList codeList;
 
 	@Autowired
-	private CustomerApplicationDao customerApplicationDao;
+	private CustomerApplicationRepository customerApplicationRepository;
 	
 	public void setCodeName(ApplicationDto applicationDto) {
 		applicationDto.setDispCompanyIndustryType(codeList.getValue(
@@ -39,7 +39,7 @@ public class CommonCustomerService {
 	}
 	
 	public ApplicationDto getApplication(String id) {
-		CustomerApplication customerApplication = customerApplicationDao.selectById(id);
+		CustomerApplication customerApplication = customerApplicationRepository.selectById(id);
 		ApplicationDto customerApplicationDto = new ApplicationDto();
 		BeanUtils.copyProperties(customerApplication, customerApplicationDto);
 		setCodeName(customerApplicationDto);
@@ -56,7 +56,7 @@ public class CommonCustomerService {
 	}
 	
 	public ApplicationDto getApplicationForUpdate(String id) {
-		CustomerApplication customerApplication = customerApplicationDao.selectByIdForUpdate(id);
+		CustomerApplication customerApplication = customerApplicationRepository.selectByIdForUpdate(id);
 		ApplicationDto customerApplicationDto = new ApplicationDto();
 		BeanUtils.copyProperties(customerApplication, customerApplicationDto);
 		setCodeName(customerApplicationDto);

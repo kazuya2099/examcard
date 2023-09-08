@@ -1,11 +1,10 @@
 package com.examcard.form.customer;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
-
 import org.hibernate.validator.constraints.Length;
 
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data

@@ -3,14 +3,16 @@ package com.examcard.interceptor;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.context.request.ServletWebRequest;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.context.request.WebRequestInterceptor;
 
 import com.examcard.component.common.CodeList;
 
-public class CodeListInterceptor extends HandlerInterceptorAdapter {
+import jakarta.servlet.http.HttpServletRequest;
+
+public class CodeListInterceptor implements WebRequestInterceptor {
 
 	private CodeList codeDefinition;
 
@@ -19,7 +21,9 @@ public class CodeListInterceptor extends HandlerInterceptorAdapter {
 	}
 
 	@Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+	public void preHandle(WebRequest paramWebRequest) {
+		ServletWebRequest servletWebRequest = (ServletWebRequest) paramWebRequest;
+		HttpServletRequest request = servletWebRequest.getRequest();
 		Set<Entry<String, String>> setaiFamilies = codeDefinition.getCodeSet("setaiFamily");
 		Set<Entry<String, String>> setaiStatuses = codeDefinition.getCodeSet("setaiStatus");
 		Set<Entry<String, String>> setaiLoans = codeDefinition.getCodeSet("setaiLoan");
@@ -30,6 +34,13 @@ public class CodeListInterceptor extends HandlerInterceptorAdapter {
 		request.setAttribute("setaiLoans", setaiLoans);
 		request.setAttribute("employmentStatuses", employmentStatuses);
 		request.setAttribute("companyIndustryTypes", companyIndustryTypes);
-        return true;
     }
+
+	@Override
+	public void postHandle(WebRequest paramWebRequest, ModelMap paramModelMap) throws Exception {
+	}
+
+	@Override
+	public void afterCompletion(WebRequest paramWebRequest, Exception paramException) throws Exception {
+	}
 }

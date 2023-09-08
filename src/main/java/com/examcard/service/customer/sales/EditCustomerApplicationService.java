@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.examcard.component.authentication.AuthenticationUtil;
-import com.examcard.dao.application.CustomerApplication;
-import com.examcard.dao.application.CustomerApplicationDao;
 import com.examcard.dto.common.UserDto;
 import com.examcard.dto.customer.sales.ApplicationDto;
 import com.examcard.exception.BusinessException;
+import com.examcard.repository.application.CustomerApplication;
+import com.examcard.repository.application.CustomerApplicationRepository;
 import com.examcard.service.customer.AbstractCustomerService;
 import com.examcard.service.customer.CommonCustomerService;
 import com.examcard.util.common.OperationDateUtil;
@@ -23,7 +23,7 @@ import com.examcard.util.common.OperationDateUtil;
 public class EditCustomerApplicationService extends AbstractCustomerService {
 
 	@Autowired
-	private CustomerApplicationDao customerApplicationDao;
+	private CustomerApplicationRepository customerApplicationRepository;
 	
 	@Autowired
 	private CommonCustomerService commonCustomerService;
@@ -43,7 +43,7 @@ public class EditCustomerApplicationService extends AbstractCustomerService {
 		UserDto userDto = AuthenticationUtil.getUserDto();
 		customerApplication.setUpdateDate(OperationDateUtil.getDate());
 		customerApplication.setUpdateUser(userDto.getId());
-		customerApplicationDao.update(customerApplication);
+		customerApplicationRepository.update(customerApplication);
 	}
 	
 	public ApplicationDto getCustomerApplication(String id) {
