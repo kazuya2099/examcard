@@ -1,11 +1,11 @@
-package com.examcard.dao.application;
+package com.examcard.repository.customer;
 
 import java.util.Date;
 
 import lombok.Data;
 
 @Data
-public class CustomerApplication {
+public class Customer {
 	
 	private String id;
 	private String firstname;
@@ -49,8 +49,7 @@ public class CustomerApplication {
 	private String companyIndustryType;
 	private String companyWorkYears;
 	private String role;
-	private String applicationStatus;
-	private String applicationComment;
+	private String password;
 	private Date createDate;
 	private String createUser;
 	private Date updateDate;
@@ -58,7 +57,4 @@ public class CustomerApplication {
 	private Date deleteDate;
 	private String deleteUser;
 	private String deleteFlag;
-	private Integer start;
-	private Integer end;
-	private Integer pageCount;
 }

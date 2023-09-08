@@ -1,7 +1,9 @@
-package com.examcard.dao.top;
+package com.examcard.repository.top;
 
-public interface PointDao {
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
+public interface PointRepository {
 	/**
 	 * 保有ポイントを取得
 	 * @param userId

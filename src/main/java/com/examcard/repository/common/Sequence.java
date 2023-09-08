@@ -1,16 +1,16 @@
-package com.examcard.dao.common;
+package com.examcard.repository.common;
 
 import java.util.Date;
 
 import lombok.Data;
 
 @Data
-public class Information {
+public class Sequence {
 
-	private long id;
-	private String message;
-	private Date startDate;
-	private Date endDate;
+	private String tableName;
+	private Integer id;
+	private String paddingChar;
+	private Integer length;
 	private Date createDate;
 	private String createUser;
 	private Date updateDate;

@@ -1,4 +1,4 @@
-package com.examcard.dao.customer;
+package com.examcard.repository.customer;
 
 import java.util.Date;
 
@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Data
 public class UserCard {
-	
 	private String userId;
 	private String cardId;
 	private String cardName;

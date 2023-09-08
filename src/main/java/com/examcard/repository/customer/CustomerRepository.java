@@ -1,9 +1,11 @@
-package com.examcard.dao.customer;
+package com.examcard.repository.customer;
 
 import java.util.List;
 
-public interface CustomerDao {
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
+public interface CustomerRepository {
 	public List<Customer> select(Customer customer);
 	public Customer selectById(String id);
 	public List<UserCard> selectUserCard(String id);

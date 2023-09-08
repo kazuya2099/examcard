@@ -1,4 +1,4 @@
-package com.examcard.dao.top;
+package com.examcard.repository.top;
 
 import java.util.Date;
 

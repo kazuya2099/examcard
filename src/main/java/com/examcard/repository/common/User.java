@@ -1,4 +1,4 @@
-package com.examcard.dao.common;
+package com.examcard.repository.common;
 
 
 import lombok.Data;

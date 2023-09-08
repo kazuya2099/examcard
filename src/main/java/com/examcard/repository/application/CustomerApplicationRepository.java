@@ -1,9 +1,11 @@
-package com.examcard.dao.application;
+package com.examcard.repository.application;
 
 import java.util.List;
 
-public interface CustomerApplicationDao {
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
+public interface CustomerApplicationRepository {
 	public void insert(CustomerApplication customerApplication);
 	public long update(CustomerApplication customerApplication);
 	public long count(CustomerApplication customerApplication);
