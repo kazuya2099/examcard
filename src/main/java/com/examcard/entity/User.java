@@ -1,4 +1,4 @@
-package com.examcard.repository.common;
+package com.examcard.entity;
 
 
 import lombok.Data;

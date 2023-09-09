@@ -9,7 +9,7 @@ import com.examcard.component.authentication.AuthenticationUtil;
 import com.examcard.constant.ApplicationStatus;
 import com.examcard.dto.common.UserDto;
 import com.examcard.dto.customer.sales.ApplicationDto;
-import com.examcard.repository.application.CustomerApplication;
+import com.examcard.entity.CustomerApplication;
 import com.examcard.repository.application.CustomerApplicationRepository;
 import com.examcard.service.common.SequenceService;
 import com.examcard.util.common.OperationDateUtil;

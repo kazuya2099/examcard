@@ -1,4 +1,4 @@
-package com.examcard.repository.application;
+package com.examcard.entity;
 
 import java.util.Date;
 

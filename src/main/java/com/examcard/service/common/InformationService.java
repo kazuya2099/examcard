@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.examcard.dto.common.InformationDto;
-import com.examcard.repository.common.Information;
+import com.examcard.entity.Information;
 import com.examcard.repository.common.InformationRepository;
 
 @Service

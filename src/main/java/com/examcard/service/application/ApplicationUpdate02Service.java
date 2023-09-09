@@ -10,8 +10,8 @@ import com.examcard.component.authentication.AuthenticationUtil;
 import com.examcard.component.common.MessageHelper;
 import com.examcard.dto.common.UserDto;
 import com.examcard.dto.customer.sales.ApplicationDto;
+import com.examcard.entity.CustomerApplication;
 import com.examcard.exception.BusinessException;
-import com.examcard.repository.application.CustomerApplication;
 import com.examcard.repository.application.CustomerApplicationRepository;
 import com.examcard.util.common.OperationDateUtil;
 

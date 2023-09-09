@@ -2,22 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.examcard.repository.top.UserCardRepository">
 
-	<select id="selectByUserId" parameterType="java.lang.String" resultType="com.examcard.repository.top.UserCard">
-		select
-			mc.name as card_name,
-			muc.card_number1,
-			muc.card_number2,
-			muc.card_number3,
-			muc.card_number4
-		from
-			m_user_card muc
-		inner join
-			m_card mc
-		on
-			muc.card_id = mc.id
-		where
-			muc.user_id = #{userId}
-			and muc.delete_flg = '0'
-			and mc.delete_flg = '0'
+	<select id="selectByUserId" parameterType="java.lang.String" resultType="com.examcard.entity.UserCard">
+		SELECT
+			MC.NAME AS CARD_NAME,
+			MUC.CARD_NUMBER1,
+			MUC.CARD_NUMBER2,
+			MUC.CARD_NUMBER3,
+			MUC.CARD_NUMBER4
+		FROM
+			M_USER_CARD MUC
+		INNER JOIN
+			M_CARD MC
+		ON
+			MUC.CARD_ID = MC.ID
+		WHERE
+			MUC.USER_ID = #{userId}
+			AND MUC.DELETE_FLG = '0'
+			AND MC.DELETE_FLG = '0'
 	</select>
 </mapper>

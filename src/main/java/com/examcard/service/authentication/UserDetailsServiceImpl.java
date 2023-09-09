@@ -15,9 +15,13 @@ import org.springframework.stereotype.Service;
 
 import com.examcard.component.authentication.UserDetailsImpl;
 import com.examcard.dto.common.UserDto;
-import com.examcard.repository.common.User;
+import com.examcard.entity.User;
 import com.examcard.repository.common.UserRepository;
 
+/**
+ * DIコンテナに登録すると自動検出してくれるので紐づけ設定不要.
+ * @author mhama
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 

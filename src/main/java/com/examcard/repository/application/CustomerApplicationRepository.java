@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.examcard.entity.CustomerApplication;
+
 @Mapper
 public interface CustomerApplicationRepository {
 	public void insert(CustomerApplication customerApplication);

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.examcard.dto.common.UserDto;
-import com.examcard.repository.common.User;
+import com.examcard.entity.User;
 import com.examcard.repository.common.UserRepository;
 
 @Service

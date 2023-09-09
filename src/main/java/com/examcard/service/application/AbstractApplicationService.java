@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.examcard.component.common.CodeList;
 import com.examcard.constant.CodeMapKey;
 import com.examcard.dto.customer.sales.ApplicationDto;
-import com.examcard.repository.application.CustomerApplication;
+import com.examcard.entity.CustomerApplication;
 import com.examcard.repository.application.CustomerApplicationRepository;
 
 @Service

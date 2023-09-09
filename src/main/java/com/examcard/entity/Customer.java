@@ -1,4 +1,4 @@
-package com.examcard.repository.customer;
+package com.examcard.entity;
 
 import java.util.Date;
 

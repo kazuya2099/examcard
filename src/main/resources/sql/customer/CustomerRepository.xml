@@ -2,419 +2,388 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.examcard.repository.customer.CustomerRepository">
 
-	<resultMap id="customerMap" type="com.examcard.repository.customer.Customer">
+	<resultMap id="customerMap" type="com.examcard.entity.Customer">
 		<result property="deleteFlag" column="delete_flg" />
 	</resultMap>
 
-	<resultMap id="userCardMap" type="com.examcard.repository.customer.UserCard">
-	</resultMap>
-	
-	<select id="select" parameterType="com.examcard.repository.customer.Customer" resultMap="customerMap">
-		select
-			id,
-			firstname,
-			lastname,
-			lastname_kana,
-			firstname_kana,
-			zip1,
-			zip2,
-			address_prefecture,
-			address_city,
-			address_ooaza,
-			address_aza,
-			address_other,
-			tel1,
-			tel2,
-			tel3,
-			mobile_tel1,
-			mobile_tel2,
-			mobile_tel3,
-			email,
-			password,
-			setai_family,
-			setai_count,
-			setai_status,
-			setai_year,
-			setai_loan,
-			income,
-			savings,
-			employment_status,
-			company_name,
-			company_zip1,
-			company_zip2,
-			company_address_prefecture,
-			company_address_city,
-			company_address_ooaza,
-			company_address_aza,
-			company_address_other,
-			company_tel1,
-			company_tel2,
-			company_tel3,
-			company_department,
-			company_industry_type,
-			company_work_years
-		from
-			m_customer
-		where
-			delete_flg = '0'
+	<select id="select" parameterType="com.examcard.entity.Customer" resultMap="customerMap">
+		SELECT
+			ID,
+			FIRSTNAME,
+			LASTNAME,
+			LASTNAME_KANA,
+			FIRSTNAME_KANA,
+			ZIP1,
+			ZIP2,
+			ADDRESS_PREFECTURE,
+			ADDRESS_CITY,
+			ADDRESS_OOAZA,
+			ADDRESS_AZA,
+			ADDRESS_OTHER,
+			TEL1,
+			TEL2,
+			TEL3,
+			MOBILE_TEL1,
+			MOBILE_TEL2,
+			MOBILE_TEL3,
+			EMAIL,
+			PASSWORD,
+			SETAI_FAMILY,
+			SETAI_COUNT,
+			SETAI_STATUS,
+			SETAI_YEAR,
+			SETAI_LOAN,
+			INCOME,
+			SAVINGS,
+			EMPLOYMENT_STATUS,
+			COMPANY_NAME,
+			COMPANY_ZIP1,
+			COMPANY_ZIP2,
+			COMPANY_ADDRESS_PREFECTURE,
+			COMPANY_ADDRESS_CITY,
+			COMPANY_ADDRESS_OOAZA,
+			COMPANY_ADDRESS_AZA,
+			COMPANY_ADDRESS_OTHER,
+			COMPANY_TEL1,
+			COMPANY_TEL2,
+			COMPANY_TEL3,
+			COMPANY_DEPARTMENT,
+			COMPANY_INDUSTRY_TYPE,
+			COMPANY_WORK_YEARS
+		FROM
+			M_CUSTOMER
+		WHERE
+			DELETE_FLG = '0'
 			<if test="firstname != null">
-				and firstname = #{firstname}
+				AND FIRSTNAME = #{firstname}
 			</if>
 			<if test="lastname != null">
-				and lastname = #{lastname}
+				AND LASTNAME = #{lastname}
 			</if>
 			<if test="lastnameKana != null">
-				and lastname_kana = #{lastnameKana}
+				AND LASTNAME_KANA = #{lastnameKana}
 			</if>
 			<if test="firstnameKana != null">
-				and firstname_kana = #{firstnameKana}
+				AND FIRSTNAME_KANA = #{firstnameKana}
 			</if>
 			<if test="zip1 != null">
-				and zip1 = #{zip1}
+				AND ZIP1 = #{zip1}
 			</if>
 			<if test="zip2 != null">
-				and zip2 = #{zip2}
+				AND ZIP2 = #{zip2}
 			</if>
 			<if test="addressPrefecture != null">
-				and address_prefecture = #{addressPrefecture}
+				AND ADDRESS_PREFECTURE = #{addressPrefecture}
 			</if>
 			<if test="addressCity != null">
-				and address_city = #{addressCity}
+				AND ADDRESS_CITY = #{addressCity}
 			</if>
 			<if test="addressOoaza != null">
-				and address_ooaza = #{addressOoaza}
+				AND ADDRESS_OOAZA = #{addressOoaza}
 			</if>
 			<if test="addressAza != null">
-				and address_aza = #{addressAza}
+				AND ADDRESS_AZA = #{addressAza}
 			</if>
 			<if test="addressOther != null">
-				and address_other = #{addressOther}
+				AND ADDRESS_OTHER = #{addressOther}
 			</if>
 			<if test="tel1 != null">
-				and tel1 = #{tel1}
+				AND TEL1 = #{tel1}
 			</if>
 			<if test="tel2 != null">
-				and tel2 = #{tel2}
+				AND TEL2 = #{tel2}
 			</if>
 			<if test="tel3 != null">
-				and tel3 = #{tel3}
+				AND TEL3 = #{tel3}
 			</if>
 			<if test="mobileTel1 != null">
-				and mobile_tel1 = #{mobileTel1}
+				AND MOBILE_TEL1 = #{mobileTel1}
 			</if>
 			<if test="mobileTel2 != null">
-				and mobile_tel2 = #{mobileTel2}
+				AND MOBILE_TEL2 = #{mobileTel2}
 			</if>
 			<if test="mobileTel3 != null">
-				and mobile_tel3 = #{mobileTel3}
+				AND MOBILE_TEL3 = #{mobileTel3}
 			</if>
 			<if test="email != null">
-				and email = #{email}
+				AND EMAIL = #{email}
 			</if>
 			<if test="password != null">
-				and password = #{password}
+				AND PASSWORD = #{password}
 			</if>
 			<if test="setaiFamily != null">
-				and setai_family = #{setaiFamily}
+				AND SETAI_FAMILY = #{setaiFamily}
 			</if>
 			<if test="setaiCount != null">
-				and setai_count = #{setaiCount}
+				AND SETAI_COUNT = #{setaiCount}
 			</if>
 			<if test="setaiStatus != null">
-				and setai_status = #{setaiStatus}
+				AND SETAI_STATUS = #{setaiStatus}
 			</if>
 			<if test="setaiYear != null">
-				and setai_year = #{setaiYear}
+				AND SETAI_YEAR = #{setaiYear}
 			</if>
 			<if test="setaiLoan != null">
-				and setai_loan = #{setaiLoan}
+				AND SETAI_LOAN = #{setaiLoan}
 			</if>
 			<if test="income != null">
-				and income = #{income}
+				AND INCOME = #{income}
 			</if>
 			<if test="savings != null">
-				and savings = #{savings}
+				AND SAVINGS = #{savings}
 			</if>
 			<if test="employmentStatus != null">
-				and employment_status = #{employmentStatus}
+				AND EMPLOYMENT_STATUS = #{employmentStatus}
 			</if>
 	</select>
 
 	<select id="selectById" parameterType="java.lang.String" resultMap="customerMap">
-		select
-			id,
-			firstname,
-			lastname,
-			lastname_kana,
-			firstname_kana,
-			zip1,
-			zip2,
-			address_prefecture,
-			address_city,
-			address_ooaza,
-			address_aza,
-			address_other,
-			tel1,
-			tel2,
-			tel3,
-			mobile_tel1,
-			mobile_tel2,
-			mobile_tel3,
-			email,
-			password,
-			setai_family,
-			setai_count,
-			setai_status,
-			setai_year,
-			setai_loan,
-			income,
-			savings,
-			employment_status,
-			company_name,
-			company_zip1,
-			company_zip2,
-			company_address_prefecture,
-			company_address_city,
-			company_address_ooaza,
-			company_address_aza,
-			company_address_other,
-			company_tel1,
-			company_tel2,
-			company_tel3,
-			company_department,
-			company_industry_type,
-			company_work_years,
-			update_date
-		from
-			m_customer
-		where
-			id = #{id}
-			and delete_flg = '0'
+		SELECT
+			ID,
+			FIRSTNAME,
+			LASTNAME,
+			LASTNAME_KANA,
+			FIRSTNAME_KANA,
+			ZIP1,
+			ZIP2,
+			ADDRESS_PREFECTURE,
+			ADDRESS_CITY,
+			ADDRESS_OOAZA,
+			ADDRESS_AZA,
+			ADDRESS_OTHER,
+			TEL1,
+			TEL2,
+			TEL3,
+			MOBILE_TEL1,
+			MOBILE_TEL2,
+			MOBILE_TEL3,
+			EMAIL,
+			PASSWORD,
+			SETAI_FAMILY,
+			SETAI_COUNT,
+			SETAI_STATUS,
+			SETAI_YEAR,
+			SETAI_LOAN,
+			INCOME,
+			SAVINGS,
+			EMPLOYMENT_STATUS,
+			COMPANY_NAME,
+			COMPANY_ZIP1,
+			COMPANY_ZIP2,
+			COMPANY_ADDRESS_PREFECTURE,
+			COMPANY_ADDRESS_CITY,
+			COMPANY_ADDRESS_OOAZA,
+			COMPANY_ADDRESS_AZA,
+			COMPANY_ADDRESS_OTHER,
+			COMPANY_TEL1,
+			COMPANY_TEL2,
+			COMPANY_TEL3,
+			COMPANY_DEPARTMENT,
+			COMPANY_INDUSTRY_TYPE,
+			COMPANY_WORK_YEARS,
+			UPDATE_DATE
+		FROM
+			M_CUSTOMER
+		WHERE
+			ID = #{id}
+			AND DELETE_FLG = '0'
 	</select>
 
-	<select id="selectUserCard" parameterType="java.lang.String" resultType="com.examcard.repository.customer.UserCard">
-		select
-			mc.id as card_id,
-			mc.name as card_name,
-			md.id as brand_id,
-			md.name as brand_name,
-			mcc.card_number1,
-			mcc.card_number2,
-			mcc.card_number3,
-			mcc.card_number4,
-			mcc.update_date
-		from
-			m_customer_card mcc
-		inner join
-			m_card mc
-		on
-			mcc.card_id = mc.id
-			and mcc.user_id = #{userId}
-		inner join
-			m_brand md
-		on
-			md.id = mcc.brand_id
-		where
-			mcc.delete_flg = '0'
-    		and mc.delete_flg = '0'
-    		and md.delete_flg = '0'
-	</select>
-	
-	<update id="update" parameterType="com.examcard.repository.customer.Customer">
-		update
-			m_customer
-		set
+	<update id="update" parameterType="com.examcard.entity.Customer">
+		UPDATE
+			M_CUSTOMER
+		SET
 			<if test="firstname != null">
-			firstname = #{firstname},
+			FIRSTNAME = #{firstname},
 			</if>
 			<if test="lastname != null">
-			lastname = #{lastname},
+			LASTNAME = #{lastname},
 			</if>
 			<if test="lastnameKana != null">
-			lastname_kana = #{lastnameKana},
+			LASTNAME_KANA = #{lastnameKana},
 			</if>
 			<if test="firstnameKana != null">
-			firstname_kana = #{firstnameKana},
+			FIRSTNAME_KANA = #{firstnameKana},
 			</if>
 			<if test="zip1 != null">
-			zip1 = #{zip1},
+			ZIP1 = #{zip1},
 			</if>
 			<if test="zip2 != null">
-			zip2 = #{zip2},
+			ZIP2 = #{zip2},
 			</if>
 			<if test="addressPrefecture != null">
-			address_prefecture = #{addressPrefecture},
+			ADDRESS_PREFECTURE = #{addressPrefecture},
 			</if>
 			<if test="addressCity != null">
-			address_city = #{addressCity},
+			ADDRESS_CITY = #{addressCity},
 			</if>
 			<if test="addressOoaza != null">
-			address_ooaza = #{addressOoaza},
+			ADDRESS_OOAZA = #{addressOoaza},
 			</if>
 			<if test="addressAza != null">
-			address_aza = #{addressAza},
+			ADDRESS_AZA = #{addressAza},
 			</if>
 			<if test="addressOther != null">
-			address_other = #{addressOther},
+			ADDRESS_OTHER = #{addressOther},
 			</if>
 			<if test="tel1 != null">
-			tel1 = #{tel1},
+			TEL1 = #{tel1},
 			</if>
 			<if test="tel2 != null">
-			tel2 = #{tel2},
+			TEL2 = #{tel2},
 			</if>
 			<if test="tel3 != null">
-			tel3 = #{tel3},
+			TEL3 = #{tel3},
 			</if>
 			<if test="mobileTel1 != null">
-			mobile_tel1 = #{mobileTel1},
+			MOBILE_TEL1 = #{mobileTel1},
 			</if>
 			<if test="mobileTel2 != null">
-			mobile_tel2 = #{mobileTel2},
+			MOBILE_TEL2 = #{mobileTel2},
 			</if>
 			<if test="mobileTel3 != null">
-			mobile_tel3 = #{mobileTel3},
+			MOBILE_TEL3 = #{mobileTel3},
 			</if>
 			<if test="email != null">
-			email = #{email},
+			EMAIL = #{email},
 			</if>
 			<if test="setaiFamily != null">
-			setai_family = #{setaiFamily},
+			SETAI_FAMILY = #{setaiFamily},
 			</if>
 			<if test="setaiCount != null">
-			setai_count = #{setaiCount},
+			SETAI_COUNT = #{setaiCount},
 			</if>
 			<if test="setaiStatus != null">
-			setai_status = #{setaiStatus},
+			SETAI_STATUS = #{setaiStatus},
 			</if>
 			<if test="setaiYear != null">
-			setai_year = #{setaiYear},
+			SETAI_YEAR = #{setaiYear},
 			</if>
 			<if test="setaiLoan != null">
-			setai_loan = #{setaiLoan},
+			SETAI_LOAN = #{setaiLoan},
 			</if>
 			<if test="income != null">
-			income = #{income},
+			INCOME = #{income},
 			</if>
 			<if test="savings != null">
-			savings = #{savings},
+			SAVINGS = #{savings},
 			</if>
 			<if test="employmentStatus != null">
-			employment_status = #{employmentStatus},
+			EMPLOYMENT_STATUS = #{employmentStatus},
 			</if>
 			<if test="companyName != null">
-			company_name = #{companyName},
+			COMPANY_NAME = #{companyName},
 			</if>
 			<if test="companyZip1 != null">
-			company_zip1 = #{companyZip1},
+			COMPANY_ZIP1 = #{companyZip1},
 			</if>
 			<if test="companyZip2 != null">
-			company_zip2 = #{companyZip2},
+			COMPANY_ZIP2 = #{companyZip2},
 			</if>
 			<if test="companyAddressPrefecture != null">
-			company_address_prefecture = #{companyAddressPrefecture},
+			COMPANY_ADDRESS_PREFECTURE = #{companyAddressPrefecture},
 			</if>
 			<if test="companyAddressCity != null">
-			company_address_city = #{companyAddressCity},
+			COMPANY_ADDRESS_CITY = #{companyAddressCity},
 			</if>
 			<if test="companyAddressOoaza != null">
-			company_address_ooaza = #{companyAddressOoaza},
+			COMPANY_ADDRESS_OOAZA = #{companyAddressOoaza},
 			</if>
 			<if test="companyAddressAza != null">
-			company_address_aza = #{companyAddressAza},
+			COMPANY_ADDRESS_AZA = #{companyAddressAza},
 			</if>
 			<if test="companyAddressOther != null">
-			company_address_other = #{companyAddressOther},
+			COMPANY_ADDRESS_OTHER = #{companyAddressOther},
 			</if>
 			<if test="companyTel1 != null">
-			company_tel1 = #{companyTel1},
+			COMPANY_TEL1 = #{companyTel1},
 			</if>
 			<if test="companyTel2 != null">
-			company_tel2 = #{companyTel2},
+			COMPANY_TEL2 = #{companyTel2},
 			</if>
 			<if test="companyTel3 != null">
-			company_tel3 = #{companyTel3},
+			COMPANY_TEL3 = #{companyTel3},
 			</if>
 			<if test="companyDepartment != null">
-			company_department = #{companyDepartment},
+			COMPANY_DEPARTMENT = #{companyDepartment},
 			</if>
 			<if test="companyIndustryType != null">
-			company_industry_type = #{companyIndustryType},
+			COMPANY_INDUSTRY_TYPE = #{companyIndustryType},
 			</if>
 			<if test="companyWorkYears != null">
-			company_work_years = #{companyWorkYears},
+			COMPANY_WORK_YEARS = #{companyWorkYears},
 			</if>
-			update_date = #{updateDate},
-			update_user = #{updateUser}
-		where
-			id = #{id}
+			UPDATE_DATE = #{updateDate},
+			UPDATE_USER = #{updateUser}
+		WHERE
+			ID = #{id}
 	</update>
 	
-	<insert id="insert" parameterType="com.examcard.repository.customer.Customer">
-		insert into
-			m_customer(
-				id,
-				firstname,
-				lastname,
-				lastname_kana,
-				firstname_kana,
-				zip1,
-				zip2,
-				address_prefecture,
-				address_city,
-				address_ooaza,
+	<insert id="insert" parameterType="com.examcard.entity.Customer">
+		INSERT INTO
+			M_CUSTOMER(
+				ID,
+				FIRSTNAME,
+				LASTNAME,
+				LASTNAME_KANA,
+				FIRSTNAME_KANA,
+				ZIP1,
+				ZIP2,
+				ADDRESS_PREFECTURE,
+				ADDRESS_CITY,
+				ADDRESS_OOAZA,
 			<if test="addressAza != null">
-				address_aza,
+				ADDRESS_AZA,
 			</if>
 			<if test="addressOther != null">
-				address_other,
+				ADDRESS_OTHER,
 			</if>
-				tel1,
-				tel2,
-				tel3,
+				TEL1,
+				TEL2,
+				TEL3,
 			<if test="mobileTel1 != null">
-				mobile_tel1,
+				MOBILE_TEL1,
 			</if>
 			<if test="mobileTel2 != null">
-				mobile_tel2,
+				MOBILE_TEL2,
 			</if>
 			<if test="mobileTel3 != null">
-				mobile_tel3,
+				MOBILE_TEL3,
 			</if>
-				email,
-				setai_family,
-				setai_count,
-				setai_status,
-				setai_year,
-				setai_loan,
-				income,
-				savings,
-				employment_status,
-				company_name,
-				company_zip1,
-				company_zip2,
-				company_address_prefecture,
-				company_address_city,
-				company_address_ooaza,
+				EMAIL,
+				SETAI_FAMILY,
+				SETAI_COUNT,
+				SETAI_STATUS,
+				SETAI_YEAR,
+				SETAI_LOAN,
+				INCOME,
+				SAVINGS,
+				EMPLOYMENT_STATUS,
+				COMPANY_NAME,
+				COMPANY_ZIP1,
+				COMPANY_ZIP2,
+				COMPANY_ADDRESS_PREFECTURE,
+				COMPANY_ADDRESS_CITY,
+				COMPANY_ADDRESS_OOAZA,
 			<if test="companyAddressAza != null">
-				company_address_aza,
+				COMPANY_ADDRESS_AZA,
 			</if>
 			<if test="companyAddressOther != null">
-				company_address_other,
+				COMPANY_ADDRESS_OTHER,
 			</if>
-				company_tel1,
-				company_tel2,
-				company_tel3,
-				company_department,
-				company_industry_type,
-				company_work_years,
-				password,
-				create_date,
-				create_user,
-				update_date,
-				update_user
+				COMPANY_TEL1,
+				COMPANY_TEL2,
+				COMPANY_TEL3,
+				COMPANY_DEPARTMENT,
+				COMPANY_INDUSTRY_TYPE,
+				COMPANY_WORK_YEARS,
+				PASSWORD,
+				CREATE_DATE,
+				CREATE_USER,
+				UPDATE_DATE,
+				UPDATE_USER
 			)
-			values(
+			VALUES(
 				#{id},
 				#{firstname},
 				#{lastname},

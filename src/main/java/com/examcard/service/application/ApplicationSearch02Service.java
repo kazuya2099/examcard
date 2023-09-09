@@ -12,8 +12,8 @@ import com.examcard.component.common.MessageHelper;
 import com.examcard.dto.application.ApplicationSearch02InputDto;
 import com.examcard.dto.application.ApplicationSearch02OutputDto;
 import com.examcard.dto.customer.sales.ApplicationDto;
+import com.examcard.entity.CustomerApplication;
 import com.examcard.exception.BusinessException;
-import com.examcard.repository.application.CustomerApplication;
 import com.examcard.repository.application.CustomerApplicationRepository;
 
 @Service
