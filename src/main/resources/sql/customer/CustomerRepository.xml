@@ -3,6 +3,8 @@
 <mapper namespace="com.examcard.repository.customer.CustomerRepository">
 
 	<resultMap id="customerMap" type="com.examcard.entity.Customer">
+		<result property="firstname" column="FIRSTNAME" />
+		<result property="lastname" column="LASTNAME" />
 		<result property="deleteFlag" column="delete_flg" />
 	</resultMap>
 

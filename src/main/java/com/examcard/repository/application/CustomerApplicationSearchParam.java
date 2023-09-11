@@ -1,13 +1,9 @@
-package com.examcard.dto.customer.sales;
-
-import java.util.Date;
-import java.util.List;
+package com.examcard.repository.application;
 
 import lombok.Data;
 
 @Data
-public class ApplicationDto {
-	private String id;
+public class CustomerApplicationSearchParam {
 	private String firstname;
 	private String lastname;
 	private String lastnameKana;
@@ -27,17 +23,13 @@ public class ApplicationDto {
 	private String mobileTel3;
 	private String email;
 	private String setaiFamily;
-	private String dispSetaiFamily;
 	private String setaiCount;
 	private String setaiStatus;
-	private String dispSetaiStatus;
 	private String setaiYear;
 	private String setaiLoan;
-	private String dispSetaiLoan;
 	private Long income;
 	private Long savings;
 	private String employmentStatus;
-	private String dispEmploymentStatus;
 	private String companyName;
 	private String companyZip1;
 	private String companyZip2;
@@ -51,11 +43,9 @@ public class ApplicationDto {
 	private String companyTel3;
 	private String companyDepartment;
 	private String companyIndustryType;
-	private String dispCompanyIndustryType;
 	private String companyWorkYears;
 	private String applicationStatus;
 	private String applicationComment;
-	private String dispApplicationStatus;
-	private Date updateDate;
-	private List<UserCardDto> userCardDtoList;
+	private Integer start;
+	private Integer end;
 }

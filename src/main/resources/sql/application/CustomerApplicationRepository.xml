@@ -3,12 +3,18 @@
 <mapper namespace="com.examcard.repository.application.CustomerApplicationRepository">
 
 	<resultMap id="customerApplicationMap" type="com.examcard.entity.CustomerApplication">
+		<result property="lastname" column="SEI" />
+		<result property="firstname" column="MEI" />
 		<result property="lastnameKana" column="SEI_KANA" />
 		<result property="firstnameKana" column="MEI_KANA" />
-		<result property="deleteFlag" column="del_flg" />
+		<result property="deleteFlag" column="DEL_FLG" />
+		<result property="deleteFlag" column="DEL_FLG" />
+		<result property="deleteFlag" column="DEL_FLG" />
+		<result property="deleteFlag" column="DEL_FLG" />
+		<result property="deleteFlag" column="DEL_FLG" />
 	</resultMap>
 	
-	<select id="count" parameterType="com.examcard.entity.CustomerApplication" resultType="long">
+	<select id="count" parameterType="com.examcard.repository.application.CustomerApplicationSearchParam" resultType="long">
 		SELECT
 			COUNT(*)
 		FROM
@@ -16,7 +22,7 @@
 		<include refid="selectWhere"/>
 	</select>
 	
-	<select id="select" parameterType="com.examcard.entity.CustomerApplication" resultMap="customerApplicationMap">
+	<select id="select" parameterType="com.examcard.repository.application.CustomerApplicationSearchParam" resultMap="customerApplicationMap">
 		SELECT
 			ID,
 			SEI,
@@ -504,7 +510,7 @@
 			ID = #{id}
 	</update>
 
-	<select id="countForJudgement" parameterType="com.examcard.entity.CustomerApplication" resultType="long">
+	<select id="countForJudgement" parameterType="com.examcard.repository.application.CustomerApplicationSearchParam" resultType="long">
 		SELECT
 			COUNT(*)
 		FROM
@@ -512,7 +518,7 @@
 		<include refid="selectWhereForJudgement"/>
 	</select>
 
-	<select id="selectForJudgement" parameterType="com.examcard.entity.CustomerApplication" resultMap="customerApplicationMap">
+	<select id="selectForJudgement" parameterType="com.examcard.repository.application.CustomerApplicationSearchParam" resultMap="customerApplicationMap">
 		SELECT
 			ID,
 			SEI,

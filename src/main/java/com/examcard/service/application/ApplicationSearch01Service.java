@@ -1,13 +1,15 @@
 package com.examcard.service.application;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.examcard.component.common.CodeList;
 import com.examcard.component.common.MessageHelper;
 import com.examcard.dto.application.ApplicationSearch01InputDto;
 import com.examcard.dto.application.ApplicationSearch01OutputDto;
@@ -15,10 +17,15 @@ import com.examcard.dto.customer.sales.ApplicationDto;
 import com.examcard.entity.CustomerApplication;
 import com.examcard.exception.BusinessException;
 import com.examcard.repository.application.CustomerApplicationRepository;
+import com.examcard.repository.application.CustomerApplicationSearchParam;
 
 @Service
-public class ApplicationSearch01Service extends AbstractApplicationService {
+@Transactional
+public class ApplicationSearch01Service {
 
+	@Autowired
+	private CodeList codeList;
+	
 	@Autowired
 	private CustomerApplicationRepository customerApplicationRepository;
 	
@@ -44,27 +51,24 @@ public class ApplicationSearch01Service extends AbstractApplicationService {
 					"business.error.search.max.count", new String[] {String.valueOf(SEARCH_MAX_COUNT)}));
 		}
 		
-		CustomerApplication customerApplication = new CustomerApplication();
-		BeanUtils.copyProperties(inputDto, customerApplication);
-		customerApplication.setStart((pageNo - 1) * PAGENATION_SIZE);
-		customerApplication.setEnd(PAGENATION_SIZE);
-		customerApplication.setPageCount(pageCount);
-		List<CustomerApplication> customerApplications = customerApplicationRepository.select(customerApplication);
-		List<ApplicationDto> customerApplicationDtos = new ArrayList<>();
-		
-		for (CustomerApplication e : customerApplications) {
-			ApplicationDto dto = new ApplicationDto();
-			BeanUtils.copyProperties(e, dto);
-			setCodeName(dto);
-			customerApplicationDtos.add(dto);
-		}
+		CustomerApplicationSearchParam customerApplicationSearchParam = new CustomerApplicationSearchParam();
+		BeanUtils.copyProperties(inputDto, customerApplicationSearchParam);
+		customerApplicationSearchParam.setStart((pageNo - 1) * PAGENATION_SIZE);
+		customerApplicationSearchParam.setEnd(PAGENATION_SIZE);
+		List<CustomerApplication> customerApplications = customerApplicationRepository.select(customerApplicationSearchParam);
+		List<ApplicationDto> customerApplicationDtoList = customerApplications.stream().map(customerApplication -> {
+			ApplicationDto applicationDto = new ApplicationDto();
+			BeanUtils.copyProperties(customerApplication, applicationDto);
+			codeList.setCodeName(applicationDto);
+			return applicationDto;
+		}).collect(Collectors.toList());
 			
 		ApplicationSearch01OutputDto outputDto = new ApplicationSearch01OutputDto();
 		outputDto.setPageNo(pageNo);
 		outputDto.setPageCount(pageCount);
 		outputDto.setPageSize(PAGENATION_SIZE);
 		outputDto.setSearchCount(searchCount);
-		outputDto.setCustomerApplicationDtos(customerApplicationDtos);
+		outputDto.setCustomerApplicationDtoList(customerApplicationDtoList);
 		return outputDto;
 	}
 

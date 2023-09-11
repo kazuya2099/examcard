@@ -1,9 +1,9 @@
 package com.examcard.service.authentication;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,20 +33,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		List<User> list = userRepository.selectUser(username);
-		if (list == null) {
+		if (CollectionUtils.isEmpty(list)) {
 			throw new UsernameNotFoundException(username + " is not exists!");
 		}
-
 		User user = list.get(0);
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		list.forEach(e -> {
-			authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + e.getRole()));
-		});
-
+		List<GrantedAuthority> authorities = list.stream().map(e -> {return new SimpleGrantedAuthority(ROLE_PREFIX + e.getRole());}).collect(Collectors.toList());
+		
+//		List<GrantedAuthority> authorities = new ArrayList<>();
+//		list.forEach(e -> {
+//			authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + e.getRole()));
+//		});
 		UserDetailsImpl userDetailsImpl = new UserDetailsImpl(user.getId(), user.getPassword(), authorities);
 		UserDto userDto = new UserDto();
 		BeanUtils.copyProperties(user, userDto);
-		userDto.setRoles(authorities.stream().map(e -> e.toString()).collect(Collectors.toList()));
+		userDto.setRoleList(authorities.stream().map(e -> e.toString()).collect(Collectors.toList()));
 		userDetailsImpl.setUserDto(userDto);
 		return userDetailsImpl;
 	}

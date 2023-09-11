@@ -7,7 +7,11 @@
 		<result property="lastname" column="MEI" />
 		<result property="lastnameKana" column="MEI_KANA" />
 		<result property="firstnameKana" column="SEI_KANA" />
-		<result property="deleteFlag" column="delete_flg" />
+		<result property="password" column="LOGIN_PASSWORD" />
+		<result property="role" column="ROLE_ID" />
+		<result property="departmentId" column="DEP_ID" />
+		<result property="departmentName" column="DEP_NAME" />
+		<result property="deleteFlag" column="DELETE_FLG" />
 	</resultMap>
 
 	<select id="selectUser" parameterType="java.lang.String" resultMap="userMap">
@@ -17,10 +21,9 @@
 			E.MEI,
 			E.SEI_KANA,
 			E.MEI_KANA,
-			E.DEP_ID,
-			E.LOGIN_LAST_DATE,
 			E.LOGIN_PASSWORD,
 			R.ROLE_ID,
+			E.DEP_ID,
 			D.DEP_NAME
 		FROM
 			EMPLOYEE E

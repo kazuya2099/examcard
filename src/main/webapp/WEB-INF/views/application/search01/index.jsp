@@ -113,7 +113,7 @@ function submit(no) {
 						</c:if>
 						
 						<c:if test="${empty outputDto.error}">
-							<c:if test="${outputDto.customerApplicationDtos != null}">
+							<c:if test="${outputDto.customerApplicationDtoList != null}">
 								<c:if test="${outputDto.searchCount == 0}">
 									<div class="customer-search-result">
 										<h3>該当するお客様はいませんでした。</h3>
@@ -147,7 +147,7 @@ function submit(no) {
 											<th>電話番号</th>
 											<th colspan="2">申請状況</th>
 										</tr>
-										<c:forEach var="customerApplication" items="${outputDto.customerApplicationDtos}" varStatus="rowStatus">
+										<c:forEach var="customerApplication" items="${outputDto.customerApplicationDtoList}" varStatus="rowStatus">
 										<tr>
 											<td><c:out value="${customerApplication.firstname}"/> <c:out value="${customerApplication.lastname}"/></td>
 											<td><c:out value="${customerApplication.lastnameKana}"/> <c:out value="${customerApplication.firstnameKana}"/></td>

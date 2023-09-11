@@ -2,6 +2,7 @@ package com.examcard.service.customer.sales;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,18 +10,23 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import com.examcard.component.common.CodeList;
 import com.examcard.dto.customer.sales.ApplicationDto;
 import com.examcard.dto.customer.sales.SearchDto;
 import com.examcard.dto.customer.sales.SearchResultDto;
 import com.examcard.entity.CustomerApplication;
 import com.examcard.exception.BusinessException;
 import com.examcard.repository.application.CustomerApplicationRepository;
+import com.examcard.repository.application.CustomerApplicationSearchParam;
 import com.examcard.service.customer.AbstractCustomerService;
 import com.examcard.service.customer.CommonCustomerService;
 
 @Service
 public class SearchCustomerApplicationService extends AbstractCustomerService {
 
+	@Autowired
+	private CodeList codeList;
+	
 	@Autowired
 	private CommonCustomerService commonCustomerService;
 
@@ -52,23 +58,22 @@ public class SearchCustomerApplicationService extends AbstractCustomerService {
 					"business.error.search.max.count", new String[] {String.valueOf(SEARCH_MAX_COUNT)}, null));
 		}
 		
-		CustomerApplication customerApplication = new CustomerApplication();
-		BeanUtils.copyProperties(searchDto, customerApplication);
-		customerApplication.setStart((pageNo - 1) * PAGENATION_SIZE);
-		customerApplication.setEnd(PAGENATION_SIZE);
-		customerApplication.setPageCount(pageCount);
+		CustomerApplicationSearchParam customerApplicationSearchParam = new CustomerApplicationSearchParam();
+		BeanUtils.copyProperties(searchDto, customerApplicationSearchParam);
+		customerApplicationSearchParam.setStart((pageNo - 1) * PAGENATION_SIZE);
+		customerApplicationSearchParam.setEnd(PAGENATION_SIZE);
 		List<CustomerApplication> customerApplications = 
-				customerApplicationRepository.select(customerApplication);
-		List<ApplicationDto> customerApplicationDtos = new ArrayList<>();
-		customerApplications.forEach(e -> {
-			ApplicationDto dto = new ApplicationDto();
-			BeanUtils.copyProperties(e, dto);
-			commonCustomerService.setCodeName(dto);
-			customerApplicationDtos.add(dto);
-		});
+				customerApplicationRepository.select(customerApplicationSearchParam);
+		List<ApplicationDto> customerApplicationDtoList = new ArrayList<>();
+		customerApplications.stream().map(customerApplication -> {
+			ApplicationDto applicationDto = new ApplicationDto();
+			BeanUtils.copyProperties(customerApplication, applicationDto);
+			codeList.setCodeName(applicationDto);
+			return applicationDto;
+		}).collect(Collectors.toList());
 		SearchResultDto searchResultDto = new SearchResultDto();
 		searchResultDto.setSearchCount(searchCount);
-		searchResultDto.setCustomerApplicationDtos(customerApplicationDtos);
+		searchResultDto.setCustomerApplicationDtoList(customerApplicationDtoList);
 		return searchResultDto;
 	}
 

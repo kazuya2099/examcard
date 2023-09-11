@@ -16,7 +16,7 @@ import com.examcard.util.common.OperationDateUtil;
 
 @Service
 @Transactional
-public class ApplicationCreate01Service extends AbstractApplicationService {
+public class ApplicationCreate01Service {
 
 	@Autowired
 	private CustomerApplicationRepository customerApplicationRepository;

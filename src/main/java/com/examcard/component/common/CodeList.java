@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.stereotype.Component;
 
 import com.examcard.constant.CodeMapKey;
+import com.examcard.dto.customer.sales.ApplicationDto;
 
 @Component
 public class CodeList {
@@ -88,5 +89,20 @@ public class CodeList {
 
 	public String getValue(String group, String key) {
 		return codeMap.get(group).get(key);
+	}
+	
+	public void setCodeName(ApplicationDto applicationDto) {
+		applicationDto.setDispCompanyIndustryType(getValue(
+				CodeMapKey.COMPANY_INDUSTRY_TYPE, applicationDto.getCompanyIndustryType()));
+		applicationDto.setDispEmploymentStatus(getValue(
+				CodeMapKey.EMPLOYMENT_STATUS, applicationDto.getEmploymentStatus()));
+		applicationDto.setDispSetaiFamily(getValue(
+				CodeMapKey.SETAI_FAMILY, applicationDto.getSetaiFamily()));
+		applicationDto.setDispSetaiLoan(getValue(
+				CodeMapKey.SETAI_LOAN, applicationDto.getSetaiLoan()));
+		applicationDto.setDispSetaiStatus(getValue(
+				CodeMapKey.SETAI_STATUS, applicationDto.getSetaiStatus()));
+		applicationDto.setDispApplicationStatus(getValue(
+				CodeMapKey.APPLICATION_STATUS, applicationDto.getApplicationStatus()));
 	}
 }
