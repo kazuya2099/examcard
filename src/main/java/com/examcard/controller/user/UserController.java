@@ -9,8 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.examcard.component.authentication.AuthenticationUtil;
 import com.examcard.component.common.CodeList;
@@ -24,14 +25,14 @@ public class UserController {
 	@Autowired
 	public CodeList codeDefinition;
 
-	@RequestMapping(value = {"", "/", "/index"})
+	@GetMapping(value = {"", "/", "/index"})
 	public String index(Model model) {
 		UserDto userDto = AuthenticationUtil.getUserDto();
 		model.addAttribute("userDto", userDto);
 		return "user/index";
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	@GetMapping(value = "/edit")
 	public String editUserBaseInfo(UserForm userForm, Model model) {
 		UserDto userDto = AuthenticationUtil.getUserDto();
 		BeanUtils.copyProperties(userDto, userForm);
@@ -50,7 +51,7 @@ public class UserController {
 		return "user/editUserBaseInfo";
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	@PostMapping(value = "/edit")
 	public String confirmUserBaseInfo(@Validated UserForm userForm, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "user/editUserBaseInfo";

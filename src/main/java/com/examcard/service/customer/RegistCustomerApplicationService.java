@@ -1,4 +1,4 @@
-package com.examcard.service.customer.sales;
+package com.examcard.service.customer;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +11,13 @@ import com.examcard.dto.common.UserDto;
 import com.examcard.dto.customer.sales.ApplicationDto;
 import com.examcard.entity.CustomerApplication;
 import com.examcard.repository.application.CustomerApplicationRepository;
+import com.examcard.service.common.ApplicationCommonService;
 import com.examcard.service.common.SequenceService;
-import com.examcard.service.customer.AbstractCustomerService;
-import com.examcard.service.customer.CommonCustomerService;
 import com.examcard.util.common.OperationDateUtil;
 
 @Service
 @Transactional
-public class RegistCustomerApplicationService extends AbstractCustomerService {
+public class RegistCustomerApplicationService {
 
 	@Autowired
 	private CustomerApplicationRepository customerApplicationRepository;
@@ -27,7 +26,7 @@ public class RegistCustomerApplicationService extends AbstractCustomerService {
 	private SequenceService sequenceService;
 	
 	@Autowired
-	private CommonCustomerService commonCustomerService;
+	private ApplicationCommonService applicationCommonService;
 
 	public void insert(ApplicationDto applicationDto) {
 		String id = sequenceService.getSequence("m_customer_apl");
@@ -44,10 +43,6 @@ public class RegistCustomerApplicationService extends AbstractCustomerService {
 	}
 	
 	public ApplicationDto getApplication(String id) {
-		return commonCustomerService.getApplication(id);
-	}
-	
-	public void setCodeName(ApplicationDto applicationDto) {
-		commonCustomerService.setCodeName(applicationDto);
+		return applicationCommonService.getApplication(id);
 	}
 }

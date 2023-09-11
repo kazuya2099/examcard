@@ -1,4 +1,4 @@
-package com.examcard.service.customer.sales;
+package com.examcard.service.customer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,18 +18,13 @@ import com.examcard.entity.CustomerApplication;
 import com.examcard.exception.BusinessException;
 import com.examcard.repository.application.CustomerApplicationRepository;
 import com.examcard.repository.application.CustomerApplicationSearchParam;
-import com.examcard.service.customer.AbstractCustomerService;
-import com.examcard.service.customer.CommonCustomerService;
 
 @Service
-public class SearchCustomerApplicationService extends AbstractCustomerService {
+public class SearchCustomerApplicationService {
 
 	@Autowired
 	private CodeList codeList;
 	
-	@Autowired
-	private CommonCustomerService commonCustomerService;
-
 	@Autowired
 	private CustomerApplicationRepository customerApplicationRepository;
 	
