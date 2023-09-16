@@ -1,9 +1,9 @@
 package com.examcard.tags;
 
-import javax.servlet.jsp.JspException;
-
 import org.springframework.web.servlet.tags.form.AbstractHtmlElementTag;
 import org.springframework.web.servlet.tags.form.TagWriter;
+
+import jakarta.servlet.jsp.JspException;
 
 public class PagenationTag extends AbstractHtmlElementTag {
 

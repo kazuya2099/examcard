@@ -7,5 +7,5 @@ import lombok.Data;
 @Data
 public class SearchResultDto {
 	private long searchCount;
-	List<ApplicationDto> customerApplicationDtos;
+	List<ApplicationDto> customerApplicationDtoList;
 }

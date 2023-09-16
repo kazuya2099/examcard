@@ -8,24 +8,24 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.examcard.dao.common.Information;
-import com.examcard.dao.common.InformationDao;
 import com.examcard.dto.common.InformationDto;
+import com.examcard.entity.Information;
+import com.examcard.repository.common.InformationRepository;
 
 @Service
 public class InformationService {
 
 	@Autowired
-	private InformationDao informationDao;
+	private InformationRepository informationRepository;
 
 	public List<InformationDto> getInformation() {
-		List<Information> informations = informationDao.getInformation(new Date());
-		List<InformationDto> informationDtos = new ArrayList<>();
-		for (Information information : informations) {
+		List<Information> informationList = informationRepository.selectByDate(new Date());
+		List<InformationDto> informationDtoList = new ArrayList<>();
+		for (Information information : informationList) {
 			InformationDto informationDto = new InformationDto();
 			BeanUtils.copyProperties(information, informationDto);
-			informationDtos.add(informationDto);
+			informationDtoList.add(informationDto);
 		}
-		return informationDtos;
+		return informationDtoList;
 	}
 }

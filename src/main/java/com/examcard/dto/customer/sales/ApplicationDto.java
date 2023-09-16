@@ -57,5 +57,5 @@ public class ApplicationDto {
 	private String applicationComment;
 	private String dispApplicationStatus;
 	private Date updateDate;
-	private List<UserCardDto> userCardDtos;
+	private List<UserCardDto> userCardDtoList;
 }

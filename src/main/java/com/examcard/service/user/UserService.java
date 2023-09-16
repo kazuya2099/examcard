@@ -4,18 +4,18 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.examcard.dao.common.User;
-import com.examcard.dao.common.UserDao;
 import com.examcard.dto.common.UserDto;
+import com.examcard.entity.User;
+import com.examcard.repository.common.UserRepository;
 
 @Service
 public class UserService {
 
 	@Autowired
-	private UserDao userDao;
+	private UserRepository userRepository;
 
 	public UserDto getUser(String id) {
-		User user = userDao.selectUserById(id);
+		User user = userRepository.selectUserById(id);
 		UserDto userDto = new UserDto();
 		BeanUtils.copyProperties(user, userDto);
 		return userDto;
