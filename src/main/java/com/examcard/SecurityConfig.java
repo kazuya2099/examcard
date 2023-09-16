@@ -2,10 +2,10 @@ package com.examcard;
 
 import java.util.LinkedHashMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,15 +23,11 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.examcard.component.authentication.AuthenticationFailureHandlerImpl;
 import com.examcard.component.authentication.AuthenticationSuccessHandlerImpl;
-import com.examcard.component.authentication.LogoutSuccessHandlerImpl;
-import com.examcard.service.authentication.UserDetailsServiceImpl; 
+import com.examcard.component.authentication.LogoutSuccessHandlerImpl; 
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-	@Autowired
-	private UserDetailsServiceImpl loginService;
 
 	@Bean
 	MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
@@ -39,27 +35,32 @@ public class SecurityConfig {
 	}
 	
 	@Bean
-	SecurityFilterChain filterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {
+	SecurityFilterChain securityFilterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {
 		http
+//			.authorizeHttpRequests(authorize -> authorize
+//				.requestMatchers(mvc.pattern("/login/**")).permitAll()
+//				.requestMatchers(mvc.pattern("/top")).hasAnyRole("1000", "1100", "2000", "2100", "9000")
+//				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+//				.anyRequest().authenticated()
+//			)
 			.formLogin(formLogin  -> formLogin
 					.loginPage("/login")
 					.loginProcessingUrl("/login/execute")
 					.usernameParameter("mailAddress")
 					.passwordParameter("password")
-					.failureHandler(authenticationFailureHandler())
-					.successHandler(authenticationSuccessHandler()));
-//			.logout(logout -> logout.logoutUrl("/logout")
-//					.logoutSuccessUrl("/logout/complete"))
-//			.authorizeHttpRequests(authorize -> authorize
-//				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-//				.requestMatchers(mvc.pattern("/")).permitAll()
-//				.anyRequest().authenticated()
-//			)
-//			.exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedHandler()))
-//			.rememberMe(Customizer.withDefaults());
+					.failureUrl("/login?error")
+					.successHandler(authenticationSuccessHandler()))
+			.logout(logout -> logout.logoutUrl("/logout")
+					.logoutSuccessUrl("/logout/complete"))
+			.exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedHandler()))
+			.rememberMe(Customizer.withDefaults());
 			return http.build();
 	}
 
+	/**
+	 * UserDetailsServiceとPasswordEncoderはDIコンテナに登録すると自動検出してくれるので、紐づけ設定不要.
+	 * @return
+	 */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

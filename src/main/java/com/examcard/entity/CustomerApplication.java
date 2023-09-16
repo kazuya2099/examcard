@@ -1,11 +1,11 @@
-package com.examcard.repository.customer;
+package com.examcard.entity;
 
 import java.util.Date;
 
 import lombok.Data;
 
 @Data
-public class Customer {
+public class CustomerApplication {
 	
 	private String id;
 	private String firstname;
@@ -49,7 +49,8 @@ public class Customer {
 	private String companyIndustryType;
 	private String companyWorkYears;
 	private String role;
-	private String password;
+	private String applicationStatus;
+	private String applicationComment;
 	private Date createDate;
 	private String createUser;
 	private Date updateDate;
@@ -57,4 +58,7 @@ public class Customer {
 	private Date deleteDate;
 	private String deleteUser;
 	private String deleteFlag;
+	private Integer start;
+	private Integer end;
+	private Integer pageCount;
 }

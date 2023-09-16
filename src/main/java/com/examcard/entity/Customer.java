@@ -1,12 +1,12 @@
-package com.examcard.dto.customer.sales;
+package com.examcard.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import lombok.Data;
 
 @Data
-public class ApplicationDto {
+public class Customer {
+	
 	private String id;
 	private String firstname;
 	private String lastname;
@@ -27,17 +27,13 @@ public class ApplicationDto {
 	private String mobileTel3;
 	private String email;
 	private String setaiFamily;
-	private String dispSetaiFamily;
 	private String setaiCount;
 	private String setaiStatus;
-	private String dispSetaiStatus;
 	private String setaiYear;
 	private String setaiLoan;
-	private String dispSetaiLoan;
 	private Long income;
 	private Long savings;
 	private String employmentStatus;
-	private String dispEmploymentStatus;
 	private String companyName;
 	private String companyZip1;
 	private String companyZip2;
@@ -51,11 +47,14 @@ public class ApplicationDto {
 	private String companyTel3;
 	private String companyDepartment;
 	private String companyIndustryType;
-	private String dispCompanyIndustryType;
 	private String companyWorkYears;
-	private String applicationStatus;
-	private String applicationComment;
-	private String dispApplicationStatus;
+	private String role;
+	private String password;
+	private Date createDate;
+	private String createUser;
 	private Date updateDate;
-	private List<UserCardDto> userCardDtoList;
+	private String updateUser;
+	private Date deleteDate;
+	private String deleteUser;
+	private String deleteFlag;
 }

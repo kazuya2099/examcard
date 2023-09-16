@@ -73,7 +73,7 @@ public class ApplicationCreate01Controller {
 	public String confirm(@Validated ApplicationCreate01Form applicationCreateSaForm, BindingResult result, Model model) {
 		ApplicationDto applicationDto = new ApplicationDto();
 		BeanUtils.copyProperties(applicationCreateSaForm, applicationDto);
-		applicationCreate01Service.setCodeName(applicationDto);
+		codeList.setCodeName(applicationDto);
 		model.addAttribute("applicationCreateSaForm", applicationCreateSaForm);
 		model.addAttribute("customerApplicationDto", applicationDto);
 		return "application/create01/confirm";

@@ -21,5 +21,5 @@ public class ApplicationSearch01OutputDto {
 	private Map<String, String> setaiLoan;
 	private Map<String, String> employmentStatus;
 	private Map<String, String> companyIndustryType;
-	private List<ApplicationDto> customerApplicationDtos;
+	private List<ApplicationDto> customerApplicationDtoList;
 }

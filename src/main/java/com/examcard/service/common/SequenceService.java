@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.examcard.component.authentication.AuthenticationUtil;
 import com.examcard.dto.common.UserDto;
-import com.examcard.repository.common.Sequence;
+import com.examcard.entity.Sequence;
 import com.examcard.repository.common.SequenceRepository;
 import com.examcard.util.common.OperationDateUtil;
 

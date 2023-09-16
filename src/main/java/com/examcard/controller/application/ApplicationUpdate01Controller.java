@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.examcard.component.common.CodeList;
 import com.examcard.component.common.MessageHelper;
 import com.examcard.constant.ApplicationStatus;
 import com.examcard.dto.customer.sales.ApplicationDto;
 import com.examcard.exception.BusinessException;
 import com.examcard.form.application.ApplicationUpdate01Form;
-import com.examcard.service.application.AbstractApplicationService;
 import com.examcard.service.application.ApplicationUpdate01Service;
 
 /**
@@ -27,8 +27,11 @@ import com.examcard.service.application.ApplicationUpdate01Service;
  */
 @Controller
 @RequestMapping(value = "/application/update01")
-public class ApplicationUpdate01Controller extends AbstractApplicationService {
+public class ApplicationUpdate01Controller {
 
+	@Autowired
+	private CodeList codeList;
+	
 	@Autowired
 	private ApplicationUpdate01Service applicationUpdate01Service;
 	
@@ -65,7 +68,7 @@ public class ApplicationUpdate01Controller extends AbstractApplicationService {
 		}
 		ApplicationDto applicationDto = new ApplicationDto();
 		BeanUtils.copyProperties(applicationUpdate01Form, applicationDto);
-		applicationUpdate01Service.setCodeName(applicationDto);
+		codeList.setCodeName(applicationDto);
 		
 		model.addAttribute("applicationDto", applicationDto);
 		model.addAttribute("applicationUpdate01Form", applicationUpdate01Form);

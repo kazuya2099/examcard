@@ -1,4 +1,4 @@
-package com.examcard.repository.common;
+package com.examcard.entity;
 
 
 import lombok.Data;
@@ -25,7 +25,7 @@ public class User {
 	private String mobileTel3;
 	private String email;
 	private String joinDate;
-	private String mDepartmentId;
+	private String departmentId;
 	private String departmentName;
 	private String password;
 	private String role;

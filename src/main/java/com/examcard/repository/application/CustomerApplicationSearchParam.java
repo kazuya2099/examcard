@@ -1,13 +1,9 @@
 package com.examcard.repository.application;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data
-public class CustomerApplication {
-	
-	private String id;
+public class CustomerApplicationSearchParam {
 	private String firstname;
 	private String lastname;
 	private String lastnameKana;
@@ -48,17 +44,8 @@ public class CustomerApplication {
 	private String companyDepartment;
 	private String companyIndustryType;
 	private String companyWorkYears;
-	private String role;
 	private String applicationStatus;
 	private String applicationComment;
-	private Date createDate;
-	private String createUser;
-	private Date updateDate;
-	private String updateUser;
-	private Date deleteDate;
-	private String deleteUser;
-	private String deleteFlag;
 	private Integer start;
 	private Integer end;
-	private Integer pageCount;
 }

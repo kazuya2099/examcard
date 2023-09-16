@@ -14,5 +14,5 @@ public class ApplicationSearch02OutputDto {
 	private Integer pageSize;
 	private long searchCount;
 	private String error;
-	List<ApplicationDto> customerApplicationDtos;
+	List<ApplicationDto> customerApplicationDtoList;
 }

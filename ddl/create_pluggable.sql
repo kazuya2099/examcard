@@ -107,3 +107,6 @@ CREATE TABLE INFORMATION (
 -- alter session set statistics_level=all;
 -- select e.ID, e.SEI, e.MEI, e.SEI_KANA, e.MEI_KANA, e.DEP_ID, e.LOGIN_LAST_DATE, e.LOGIN_PASSWORD, r.ROLE_ID, d.DEP_NAME from employee e inner join employee_role r on e.ID = r.EMP_ID inner join department d on e.DEP_ID = d.ID where e.ID = '0000001'
 -- select * from TABLE(DBMS_XPLAN.DISPLAY_CURSOR(format=>'ALLSTATS LAST'));
+
+-- alter session set container = EXAMCARD;
+-- alter database open;

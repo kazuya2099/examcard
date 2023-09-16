@@ -31,5 +31,5 @@ public class UserDto {
 	private String role;
 	private String mDepartmentId;
 	private String departmentName;
-	private List<String> roles;
+	private List<String> roleList;
 }
