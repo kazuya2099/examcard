@@ -7,7 +7,7 @@
 <html>
 <head>
 <jsp:include page="../common/head.jsp" flush="true" />
-<link href="${pageContext.request.contextPath}/css/login/login.css" rel="stylesheet">
+<link href="/public/css/login/login.css" rel="stylesheet">
 <title>exampleカード ログイン</title>
 </head>
 <body>
@@ -51,11 +51,6 @@
 			<div class="col-sm-2">
 				<div class="header-right"></div>
 			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12">
-			<jsp:include page="../common/footer.jsp" flush="true" />
 		</div>
 	</div>
 </body>
