@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "server.tomcat.ajp.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'server.tomcat.ajp.enabled'"
+  },
+  {
+    "name": "server.tomcat.ajp.port",
+    "type": "java.lang.String",
+    "description": "A description for 'server.tomcat.ajp.port'"
+  },
+  {
+    "name": "server.tomcat.ajp.protocol",
+    "type": "java.lang.String",
+    "description": "A description for 'server.tomcat.ajp.protocol'"
+  }
+]}

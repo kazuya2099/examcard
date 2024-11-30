@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.examcard.dto.common.UserDto;
+import com.examcard.service.dto.UserDto;
 
 public class UserDetailsImpl implements UserDetails {
 

@@ -1,9 +1,9 @@
 package com.examcard.component.authentication;
 
-import com.examcard.dto.common.UserDto;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.examcard.service.dto.UserDto;
 
 public abstract class AuthenticationUtil {
 

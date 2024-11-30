@@ -1,0 +1,96 @@
+.top-user-info {
+	margin: 10px;
+	padding: 10px;
+	background-color: #ffffff;
+}
+.top-user-info-body table td {
+	vertical-align: top;
+}
+.top-user-info-title {
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 1px solid #a0a0a0;
+}
+.top-user-info-body {
+	padding-top: 10px;
+}
+.top-user-info-body table {
+	width: 100%;
+}
+.top-user-info-body-card {
+	width: 50%;
+}
+.top-user-info-body-card-info {
+	font-size: 14px;
+}
+.top-user-info-body-point {
+	width: 50%;
+	background-color: #eeeeee;
+}
+.top-user-info-body-point table {
+	height: 100px;
+}
+.top-user-info-body-point table td {
+/* 	border: 1px solid #ff0000; */
+}
+.top-user-info-body-point-title {
+	padding-left: 10px;
+	font-weight: bold;
+
+}
+.top-user-info-body-point-info {
+	padding-left: 10px;
+	font-size: 20px;
+	font-weight: bold;
+	color: #ff0000;
+}
+.top-user-info-body-info-title {
+	width: 15%;
+	background-color: #eeeeee;
+	padding: 10px;
+	font-size: 14px;
+}
+.top-user-info-body-info-contents {
+	padding: 10px;
+	font-size: 12px;
+}
+.top-card-info {
+	mergin: 10px;
+	padding: 10px;
+	background-color: #ffffff;
+}
+.top-card-info-title {
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 1px solid #a0a0a0;
+}
+.top-card-info-bill table {
+	margin:10px 0px;
+	width: 100%;
+}
+.top-card-info-bill-title {
+	font-size: 20px;
+	padding-bottom: 10px;
+	font-weight: bold;
+	color: #000000;
+}
+.top-card-info-bill-pay-title {
+	padding: 20px;
+	font-size: 16px;
+	background-color: #eeeeee;
+}
+.top-card-info-bill-pay-day {
+	padding: 20px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.top-card-info-bill-total-title {
+	padding: 20px;
+	font-size: 16px;
+	background-color: #eeeeee;
+}
+.top-card-info-bill-total-money {
+	padding: 20px;
+	font-size: 30px;
+	font-weight: bold;
+}

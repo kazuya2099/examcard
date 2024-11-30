@@ -1,0 +1,31 @@
+.error {
+	color: #ff0000;
+	font-weight: bold;
+	font-size: 16px;
+}
+.validation-error {
+	color: #ff0000;
+}
+.pagenation {
+	overflow: hidden;
+}
+.pagenation ul {
+	background: #eee;
+	list-style: none;
+	position: relative;
+	width: 100%;
+	float: left;
+}
+.pagenation ul li {
+	position: relative;
+	float: left;
+}
+.pagenation ul li span,
+.pagenation ul li a {
+	display: block;
+	font-size: 16px;
+	padding: 0.6em 1em;
+}
+.pagenation ul li a {
+	background: #eee;
+}
