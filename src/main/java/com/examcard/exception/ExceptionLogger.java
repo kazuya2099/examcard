@@ -4,10 +4,10 @@ import java.text.MessageFormat;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.StringUtils;
 
 public class ExceptionLogger implements InitializingBean {
 
@@ -265,6 +265,7 @@ public class ExceptionLogger implements InitializingBean {
 		 * @return Returns <code>true</code> if valid.
 		 */
 		boolean isEnabled();
+
 		/**
 		 * Outputs the log.
 		 * @param logMessage log message
@@ -285,6 +286,7 @@ public class ExceptionLogger implements InitializingBean {
 		public boolean isEnabled() {
 			return monitoringLogger.isInfoEnabled() || applicationLogger.isInfoEnabled();
 		}
+
 		/**
 		 * Logs messages of Info level.
 		 * <p>
@@ -317,6 +319,7 @@ public class ExceptionLogger implements InitializingBean {
 			return monitoringLogger.isWarnEnabled() || applicationLogger
 					.isWarnEnabled();
 		}
+
 		/**
 		 * Logs messages of Warn level.
 		 * <p>
@@ -349,6 +352,7 @@ public class ExceptionLogger implements InitializingBean {
 			return monitoringLogger.isErrorEnabled() || applicationLogger
 					.isErrorEnabled();
 		}
+
 		/**
 		 * Logs messages of Error level.
 		 * <p>
