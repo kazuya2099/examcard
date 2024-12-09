@@ -3,6 +3,7 @@ target/
 .project
 .factorypath
 *.log
+*.class
 .jsdtscope
 *.prefs
 *.component
