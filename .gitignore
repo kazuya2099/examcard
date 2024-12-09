@@ -10,3 +10,4 @@ target/
 *.name
 settings.json
 /ファイル/
+/bin/
