@@ -14,8 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.examcard.component.authentication.UserDetailsImpl;
-import com.examcard.entity.User;
-import com.examcard.repository.common.UserRepository;
+import com.examcard.repository.UserRepository;
+import com.examcard.repository.entity.User;
 import com.examcard.service.dto.UserDto;
 
 /**
