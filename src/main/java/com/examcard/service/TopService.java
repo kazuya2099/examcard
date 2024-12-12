@@ -1,8 +1,8 @@
 package com.examcard.service;
 
-import com.examcard.service.dto.TopDto;
+import com.examcard.dto.TopOutputDto;
 
 public interface TopService {
 
-	public TopDto getTopData();
+	public TopOutputDto getTopData();
 }

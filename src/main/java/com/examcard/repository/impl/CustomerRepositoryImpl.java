@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.examcard.mapper.CustomerMapper;
 import com.examcard.repository.CustomerRepository;
-import com.examcard.repository.entity.Customer;
+import com.examcard.repository.entity.CustomerEntity;
 
 @Repository
 public class CustomerRepositoryImpl implements CustomerRepository {
@@ -15,19 +15,19 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 	@Autowired
 	private CustomerMapper customerMapper;
 	
-	public List<Customer> select(Customer customer) {
+	public List<CustomerEntity> select(CustomerEntity customer) {
 		return customerMapper.select(customer);
 	}
 	
-	public Customer selectById(String id) {
+	public CustomerEntity selectById(String id) {
 		return customerMapper.selectById(id);
 	}
 	
-	public long update(Customer customer) {
+	public long update(CustomerEntity customer) {
 		return customerMapper.update(customer);
 	}
 	
-	public void insert(Customer customer) {
+	public void insert(CustomerEntity customer) {
 		customerMapper.insert(customer);
 	}
 }

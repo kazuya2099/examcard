@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.examcard.mapper.InformationMapper;
 import com.examcard.repository.InformationRepository;
-import com.examcard.repository.entity.Information;
+import com.examcard.repository.entity.InformationEntity;
 
 @Repository
 public class InformationRepositoryImpl implements InformationRepository {
@@ -16,7 +16,7 @@ public class InformationRepositoryImpl implements InformationRepository {
 	@Autowired
 	private InformationMapper informationMapper;
 	
-	public List<Information> selectByDate(Date systemDate) {
+	public List<InformationEntity> selectByDate(Date systemDate) {
 		return informationMapper.selectByDate(systemDate);
 	}
 }

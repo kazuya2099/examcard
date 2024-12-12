@@ -4,13 +4,13 @@ import org.springframework.stereotype.Repository;
 
 import com.examcard.mapper.UserCardMapper;
 import com.examcard.repository.UserCardRepository;
-import com.examcard.repository.entity.UserCard;
+import com.examcard.repository.entity.UserCardEntity;
 
 @Repository
 public class UserCardRepositoryImpl implements UserCardRepository {
 	private UserCardMapper userCardMapper;
 	
-	public UserCard selectByUserId(String userId) {
+	public UserCardEntity selectByUserId(String userId) {
 		return userCardMapper.selectByUserId(userId);
 	}
 }

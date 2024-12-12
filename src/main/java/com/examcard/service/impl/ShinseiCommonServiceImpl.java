@@ -5,27 +5,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.examcard.repository.CustomerApplicationRepository;
-import com.examcard.repository.entity.CustomerApplication;
+import com.examcard.dto.ShinseiDto;
+import com.examcard.repository.ShinseiRepository;
+import com.examcard.repository.entity.ShinseiEntity;
 import com.examcard.service.ShinseiCommonService;
-import com.examcard.service.dto.ShinseiDto;
 
 @Service
 @Transactional
 public class ShinseiCommonServiceImpl implements ShinseiCommonService {
 
 	@Autowired
-	private CustomerApplicationRepository customerApplicationRepository;
+	private ShinseiRepository customerApplicationRepository;
 	
 	public ShinseiDto getApplication(String id) {
-		CustomerApplication customerApplication = customerApplicationRepository.selectById(id);
+		ShinseiEntity customerApplication = customerApplicationRepository.selectById(id);
 		ShinseiDto customerApplicationDto = new ShinseiDto();
 		BeanUtils.copyProperties(customerApplication, customerApplicationDto);
 		return customerApplicationDto;
 	}
 	
 	public ShinseiDto getApplicationForUpdate(String id) {
-		CustomerApplication customerApplication = customerApplicationRepository.selectByIdForUpdate(id);
+		ShinseiEntity customerApplication = customerApplicationRepository.selectByIdForUpdate(id);
 		ShinseiDto customerApplicationDto = new ShinseiDto();
 		BeanUtils.copyProperties(customerApplication, customerApplicationDto);
 		return customerApplicationDto;

@@ -1,7 +1,11 @@
 package com.examcard.exception;
 
+import org.jboss.logging.Logger;
+
 public class BusinessException extends RuntimeException {
 
+	Logger logger = Logger.getLogger(BusinessException.class);
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -13,6 +17,7 @@ public class BusinessException extends RuntimeException {
 	 */
 	public BusinessException(String message) {
 		super(message);
+		logger.warn(message);
 	}
 
 	/**
@@ -20,10 +25,11 @@ public class BusinessException extends RuntimeException {
 	 * <p>
 	 * Takes multiple {@code String} messages and cause of exception as argument.
 	 * </p>
-	 * @param messages {@link ResultMessages} instance
+	 * @param message {@link ResultMessages} instance
 	 * @param cause {@link Throwable} instance
 	 */
-	public BusinessException(String messages, Throwable cause) {
-		super(messages, cause);
+	public BusinessException(String message, Throwable cause) {
+		super(message, cause);
+		logger.warn(message, cause);
 	}
 }

@@ -4,17 +4,17 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.examcard.repository.entity.CustomerApplication;
-import com.examcard.repository.entity.CustomerApplicationSearchParam;
+import com.examcard.repository.entity.ShinseiEntity;
+import com.examcard.repository.entity.ShinseiSerchParamEntity;
 
 @Mapper
 public interface CustomerApplicationMapper {
-	public void insert(CustomerApplication customerApplication);
-	public long update(CustomerApplication customerApplication);
-	public long count(CustomerApplication customerApplication);
-	public List<CustomerApplication> select(CustomerApplicationSearchParam searchParam);
-	public CustomerApplication selectById(String id);
-	public CustomerApplication selectByIdForUpdate(String id);
-	public long countForJudgement(CustomerApplication customerApplication);
-	public List<CustomerApplication> selectForJudgement(CustomerApplicationSearchParam searchParam);
+	public long insert(ShinseiEntity customerApplication);
+	public long update(ShinseiEntity customerApplication);
+	public long count(ShinseiEntity customerApplication);
+	public List<ShinseiEntity> select(ShinseiSerchParamEntity searchParam);
+	public ShinseiEntity selectById(String id);
+	public ShinseiEntity selectByIdForUpdate(String id);
+	public long countForJudgement(ShinseiEntity customerApplication);
+	public List<ShinseiEntity> selectForJudgement(ShinseiSerchParamEntity searchParam);
 }

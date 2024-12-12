@@ -1,7 +1,7 @@
 package com.examcard.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +10,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.examcard.component.common.MessageHelper;
+import com.examcard.dto.ShinseiDto;
+import com.examcard.dto.ShinseiSearchInputDto;
+import com.examcard.dto.ShinseiSearchOutputDto;
 import com.examcard.exception.BusinessException;
-import com.examcard.repository.CustomerApplicationRepository;
-import com.examcard.repository.entity.CustomerApplication;
-import com.examcard.repository.entity.CustomerApplicationSearchParam;
+import com.examcard.repository.ShinseiRepository;
+import com.examcard.repository.entity.ShinseiEntity;
+import com.examcard.repository.entity.ShinseiSerchParamEntity;
 import com.examcard.service.ShinseiSearchService;
-import com.examcard.service.dto.ShinseiDto;
-import com.examcard.service.dto.ShinseiSearchInputDto;
-import com.examcard.service.dto.ShinseiSearchOutputDto;
 
 @Service
 @Transactional
 public class ShinseiSearchServiceImpl implements ShinseiSearchService {
 
 	@Autowired
-	private CustomerApplicationRepository customerApplicationRepository;
+	private ShinseiRepository shinseiRepository;
 	
 	@Autowired
 	private MessageHelper messageHelper;
@@ -48,29 +48,29 @@ public class ShinseiSearchServiceImpl implements ShinseiSearchService {
 					"business.error.search.max.count", new String[] {String.valueOf(SEARCH_MAX_COUNT)}));
 		}
 		
-		CustomerApplicationSearchParam customerApplicationSearchParam = new CustomerApplicationSearchParam();
+		ShinseiSerchParamEntity customerApplicationSearchParam = new ShinseiSerchParamEntity();
 		BeanUtils.copyProperties(inputDto, customerApplicationSearchParam);
 		customerApplicationSearchParam.setStart((pageNo - 1) * PAGENATION_SIZE);
 		customerApplicationSearchParam.setEnd(PAGENATION_SIZE);
-		List<CustomerApplication> customerApplications = customerApplicationRepository.select(customerApplicationSearchParam);
-		List<ShinseiDto> customerApplicationDtoList = customerApplications.stream().map(customerApplication -> {
-			ShinseiDto applicationDto = new ShinseiDto();
-			BeanUtils.copyProperties(customerApplication, applicationDto);
-			return applicationDto;
-		}).collect(Collectors.toList());
-			
+		List<ShinseiEntity> shinseiEntityList = shinseiRepository.select(customerApplicationSearchParam);
+		List<ShinseiDto> shinseiDtoList = new ArrayList<>();
+		for (ShinseiEntity e : shinseiEntityList) {
+			ShinseiDto dto = new ShinseiDto();
+			BeanUtils.copyProperties(e, dto);
+			shinseiDtoList.add(dto);
+		}
 		ShinseiSearchOutputDto outputDto = new ShinseiSearchOutputDto();
 		outputDto.setPageNo(pageNo);
 		outputDto.setPageCount(pageCount);
 		outputDto.setPageSize(PAGENATION_SIZE);
 		outputDto.setSearchCount(searchCount);
-		outputDto.setCustomerApplicationDtoList(customerApplicationDtoList);
+		outputDto.setShinseiDtoList(shinseiDtoList);
 		return outputDto;
 	}
 
 	private long count(ShinseiSearchInputDto inputDto) {
-		CustomerApplication customerApplication = new CustomerApplication();
+		ShinseiEntity customerApplication = new ShinseiEntity();
 		BeanUtils.copyProperties(inputDto, customerApplication);
-		return customerApplicationRepository.count(customerApplication);
+		return shinseiRepository.count(customerApplication);
 	}
 }

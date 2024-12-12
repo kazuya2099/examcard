@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.examcard.component.common.CodeList;
-import com.examcard.controller.form.ShinseiUpdateAdminForm;
+import com.examcard.constant.ErrorCode;
+import com.examcard.dto.ShinseiDto;
+import com.examcard.dto.ShinseiUpdateAdminDto;
+import com.examcard.exception.BusinessException;
 import com.examcard.service.ShinseiUpdateAdminService;
-import com.examcard.service.dto.ShinseiDto;
 
 import jakarta.validation.Valid;
 
@@ -31,38 +33,30 @@ public class ShinseiUpdateAdminController {
 	private CodeList codeList;
 
 	@Autowired
-	private ShinseiUpdateAdminService applicationUpdate02Service;
+	private ShinseiUpdateAdminService shinseiUpdateAdminService;
 
 	@GetMapping(value = "/input")
-	public String input(@RequestParam String id, ShinseiUpdateAdminForm applicationUpdate02Form, Model model) {
-		ShinseiDto applicationDto = applicationUpdate02Service.getApplication(id);
-		applicationUpdate02Form.setId(id);
-		applicationUpdate02Form.setApplicationStatus(applicationDto.getApplicationStatus());
-		applicationUpdate02Form.setApplicationComment(applicationDto.getApplicationComment());
-		BeanUtils.copyProperties(applicationDto, applicationUpdate02Form);
+	public String input(@RequestParam String id, ShinseiUpdateAdminDto inputDto, Model model) {
+		ShinseiDto applicationDto = shinseiUpdateAdminService.getApplication(id);
+		inputDto.setId(id);
+		inputDto.setApplicationStatus(applicationDto.getApplicationStatus());
+		inputDto.setApplicationComment(applicationDto.getApplicationComment());
+		BeanUtils.copyProperties(applicationDto, inputDto);
 		model.addAttribute("customerApplicationDto", applicationDto);
-		model.addAttribute("applicationUpdate02Form", applicationUpdate02Form);
+		model.addAttribute("applicationUpdate02Form", inputDto);
 		model.addAttribute("applicationStatus", codeList.getApplicationStatus());
 		return "application/update02/input";
 	}
 
 	@PostMapping(value = "/input")
-	public String update(@Valid ShinseiUpdateAdminForm applicationUpdate02Form, BindingResult result, Model model,
+	public String update(@Valid ShinseiUpdateAdminDto inputDto, BindingResult result, Model model,
 			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			ShinseiDto applicationDto = applicationUpdate02Service.getApplication(applicationUpdate02Form.getId());
-			model.addAttribute("applicationDto", applicationDto);
-			return "application/update02/input";
+			throw new BusinessException(ErrorCode.W400001.getCode());
 		}
 		ShinseiDto updateDto = new ShinseiDto();
-		BeanUtils.copyProperties(applicationUpdate02Form, updateDto);
-		applicationUpdate02Service.update(updateDto);
-		redirectAttributes.addFlashAttribute("applicationUpdate02Form", applicationUpdate02Form);
+		BeanUtils.copyProperties(inputDto, updateDto);
+		shinseiUpdateAdminService.update(updateDto);
 		return "redirect:/application/update02/complete";
-	}
-
-	@GetMapping(value = "/complete")
-	public String complete() {
-		return "application/update02/complete";
 	}
 }

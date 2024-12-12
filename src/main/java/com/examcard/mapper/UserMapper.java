@@ -1,13 +1,23 @@
 package com.examcard.mapper;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 
-import com.examcard.repository.entity.User;
+import com.examcard.repository.entity.UserEntity;
 
 @Mapper
 public interface UserMapper {
-	public List<User> selectUser(String mailAddress);
-	public User selectUserById(String id);
+	
+	/**
+	 * メールアドレスで検索
+	 * @param mailAddress
+	 * @return
+	 */
+	public UserEntity selectUser(String mailAddress);
+	
+	/**
+	 * IDで検索
+	 * @param id
+	 * @return
+	 */
+	public UserEntity selectUserById(String id);
 }

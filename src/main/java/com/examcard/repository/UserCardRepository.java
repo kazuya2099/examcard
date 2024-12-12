@@ -1,7 +1,7 @@
 package com.examcard.repository;
 
-import com.examcard.repository.entity.UserCard;
+import com.examcard.repository.entity.UserCardEntity;
 
 public interface UserCardRepository {
-	UserCard selectByUserId(String userId);
+	UserCardEntity selectByUserId(String userId);
 }

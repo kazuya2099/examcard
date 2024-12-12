@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.examcard.mapper.SequenceMapper;
 import com.examcard.repository.SequenceRepository;
-import com.examcard.repository.entity.Sequence;
+import com.examcard.repository.entity.SequenceEntity;
 
 @Repository
 public class SequenceRepositoryImpl implements SequenceRepository {
@@ -13,11 +13,11 @@ public class SequenceRepositoryImpl implements SequenceRepository {
 	@Autowired
 	private SequenceMapper sequenceMapper;
 	
-	public Sequence selectSequence(String tableName) {
+	public SequenceEntity selectSequence(String tableName) {
 		return sequenceMapper.selectSequence(tableName);
 	}
 	
-	public int updateSequence(Sequence sequence) {
+	public int updateSequence(SequenceEntity sequence) {
 		return sequenceMapper.updateSequence(sequence);
 	}
 }

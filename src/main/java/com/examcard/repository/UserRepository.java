@@ -1,10 +1,8 @@
 package com.examcard.repository;
 
-import java.util.List;
-
-import com.examcard.repository.entity.User;
+import com.examcard.repository.entity.UserEntity;
 
 public interface UserRepository {
-	public List<User> selectUser(String mailAddress);
-	public User selectUserById(String id);
+	public UserEntity selectUser(String mailAddress);
+	public UserEntity selectUserById(String id);
 }

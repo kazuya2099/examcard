@@ -7,14 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.examcard.component.authentication.AuthenticationUtil;
 import com.examcard.component.common.MessageHelper;
+import com.examcard.dto.ShinseiDto;
 import com.examcard.exception.BusinessException;
-import com.examcard.repository.CustomerApplicationRepository;
-import com.examcard.repository.entity.CustomerApplication;
+import com.examcard.repository.ShinseiRepository;
+import com.examcard.repository.entity.ShinseiEntity;
 import com.examcard.service.ShinseiUpdateService;
-import com.examcard.service.dto.ShinseiDto;
-import com.examcard.service.dto.UserDto;
 import com.examcard.util.common.OperationDateUtil;
 
 @Service
@@ -25,7 +23,7 @@ public class ShinseiUpdateServiceImpl implements ShinseiUpdateService {
 	ShinseiCommonServiceImpl applicationCommonService;
 	
 	@Autowired
-	private CustomerApplicationRepository customerApplicationRepository;
+	private ShinseiRepository customerApplicationRepository;
 	
 	@Autowired
 	private MessageHelper messageHelper;
@@ -41,11 +39,9 @@ public class ShinseiUpdateServiceImpl implements ShinseiUpdateService {
 		if (updateDate.compareTo(beforeUpdateDate) != 0) {
 			throw new BusinessException(messageHelper.getMessage("business.error.lockerror"));
 		}
-		CustomerApplication customerApplication = new CustomerApplication();
+		ShinseiEntity customerApplication = new ShinseiEntity();
 		BeanUtils.copyProperties(applicationDto, customerApplication);
-		UserDto userDto = AuthenticationUtil.getUserDto();
 		customerApplication.setUpdateDate(OperationDateUtil.getDate());
-		customerApplication.setUpdateUser(userDto.getId());
 		customerApplicationRepository.update(customerApplication);
 	}
 }

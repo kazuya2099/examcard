@@ -2,9 +2,9 @@ package com.examcard.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.examcard.repository.entity.UserCard;
+import com.examcard.repository.entity.UserCardEntity;
 
 @Mapper
 public interface UserCardMapper {
-	public UserCard selectByUserId(String id);
+	public UserCardEntity selectByUserId(String id);
 }

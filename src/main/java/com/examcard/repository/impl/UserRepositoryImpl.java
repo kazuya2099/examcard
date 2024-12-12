@@ -1,10 +1,21 @@
 package com.examcard.repository.impl;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import com.examcard.repository.entity.User;
+import com.examcard.mapper.UserMapper;
+import com.examcard.repository.UserRepository;
+import com.examcard.repository.entity.UserEntity;
 
-public interface UserRepositoryImpl {
-	public List<User> selectUser(String mailAddress);
-	public User selectUserById(String id);
+public class UserRepositoryImpl implements UserRepository {
+	
+	@Autowired
+	private UserMapper userMapper;
+	
+	public UserEntity selectUser(String mailAddress) {
+		return userMapper.selectUser(mailAddress);
+	}
+	
+	public UserEntity selectUserById(String id) {
+		return userMapper.selectUserById(id);
+	}
 }

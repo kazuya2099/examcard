@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.examcard.dto.ShinseiDto;
 import com.examcard.service.ShinseiDetailAdminService;
-import com.examcard.service.dto.ShinseiDto;
 
 @Service
 @Transactional

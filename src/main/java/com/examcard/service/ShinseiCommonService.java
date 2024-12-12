@@ -1,6 +1,6 @@
 package com.examcard.service;
 
-import com.examcard.service.dto.ShinseiDto;
+import com.examcard.dto.ShinseiDto;
 
 public interface ShinseiCommonService {
 

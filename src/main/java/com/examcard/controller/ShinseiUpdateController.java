@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.examcard.component.common.MessageHelper;
+import com.examcard.constant.ErrorCode;
 import com.examcard.constant.ShinseiStatus;
-import com.examcard.controller.form.ShinseiUpdateForm;
+import com.examcard.dto.ShinseiDto;
+import com.examcard.dto.ShinseiUpdateDto;
 import com.examcard.exception.BusinessException;
 import com.examcard.service.ShinseiUpdateService;
-import com.examcard.service.dto.ShinseiDto;
 
 /**
  * 顧客審査変更申請
@@ -35,7 +36,7 @@ public class ShinseiUpdateController {
 	private MessageHelper messageHelper;
 
 	@GetMapping(value = "/input")
-	public String input(@RequestParam("id") String id, ShinseiUpdateForm applicationUpdate01Form, Model model) {
+	public String input(@RequestParam("id") String id, ShinseiUpdateDto applicationUpdate01Form, Model model) {
 		ShinseiDto applicationDto = applicationUpdate01Service.getApplication(id);
 		BeanUtils.copyProperties(applicationDto, applicationUpdate01Form);
 		model.addAttribute("applicationUpdate01Form", applicationUpdate01Form);
@@ -43,22 +44,22 @@ public class ShinseiUpdateController {
 	}
 
 	@PostMapping(value = "/input")
-	public String validateInput(@Validated ShinseiUpdateForm applicationUpdate01Form, BindingResult result, RedirectAttributes redirectAttributes) {
+	public String validateInput(@Validated ShinseiUpdateDto applicationUpdate01Form, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			return "application/update01/input";
+			throw new BusinessException(ErrorCode.W400001.getCode());
 		}
 		redirectAttributes.addFlashAttribute("applicationUpdate01Form", applicationUpdate01Form);
 		return "redirect:/application/update01/confirm";
 	}
 	
 	@PostMapping(value = "/input", params = {"back"})
-	public String back(ShinseiUpdateForm applicationUpdate01Form, Model model) {
+	public String back(ShinseiUpdateDto applicationUpdate01Form, Model model) {
 		model.addAttribute("applicationUpdate01Form", applicationUpdate01Form);
 		return "application/update01/input";
 	}
 
 	@GetMapping(value = "/confirm")
-	public String confirm(@Validated ShinseiUpdateForm applicationUpdate01Form, BindingResult result, Model model) {
+	public String confirm(@Validated ShinseiUpdateDto applicationUpdate01Form, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			throw new BusinessException(messageHelper.getMessage("error.bad.request"));
 		}
@@ -70,7 +71,7 @@ public class ShinseiUpdateController {
 	}
 	
 	@PostMapping(value = "/confirm")
-	public String update(@Validated ShinseiUpdateForm applicationUpdate01Form, BindingResult result, RedirectAttributes redirectAttributes) {
+	public String update(@Validated ShinseiUpdateDto applicationUpdate01Form, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			throw new BusinessException(messageHelper.getMessage("error.bad.request"));
 		}

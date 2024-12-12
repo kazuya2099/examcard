@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.examcard.component.common.MessageHelper;
+import com.examcard.dto.ShinseiDto;
 import com.examcard.exception.BusinessException;
-import com.examcard.repository.CustomerApplicationRepository;
-import com.examcard.repository.entity.CustomerApplication;
+import com.examcard.repository.ShinseiRepository;
+import com.examcard.repository.entity.ShinseiEntity;
 import com.examcard.service.ShinseiUpdateAdminService;
-import com.examcard.service.dto.ShinseiDto;
 import com.examcard.util.common.OperationDateUtil;
 
 @Service
@@ -23,7 +23,7 @@ public class ShinseiUpdateAdminServiceImpl implements ShinseiUpdateAdminService 
 	ShinseiCommonServiceImpl applicationCommonService;
 	
 	@Autowired
-	private CustomerApplicationRepository customerApplicationRepository;
+	private ShinseiRepository customerApplicationRepository;
 	
 	@Autowired
 	private MessageHelper messageHelper;
@@ -39,7 +39,7 @@ public class ShinseiUpdateAdminServiceImpl implements ShinseiUpdateAdminService 
 		if (updateDate.compareTo(beforeUpdateDate) != 0) {
 			throw new BusinessException(messageHelper.getMessage("business.error.lockerror"));
 		}
-		CustomerApplication customerApplication = new CustomerApplication();
+		ShinseiEntity customerApplication = new ShinseiEntity();
 		BeanUtils.copyProperties(applicationDto, customerApplication);
 		customerApplication.setUpdateDate(OperationDateUtil.getDate());
 		customerApplicationRepository.update(customerApplication);

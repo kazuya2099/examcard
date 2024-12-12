@@ -5,11 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.examcard.component.authentication.AuthenticationUtil;
 import com.examcard.repository.SequenceRepository;
-import com.examcard.repository.entity.Sequence;
+import com.examcard.repository.entity.SequenceEntity;
 import com.examcard.service.SequenceService;
-import com.examcard.service.dto.UserDto;
 import com.examcard.util.common.OperationDateUtil;
 
 @Service
@@ -20,15 +18,13 @@ public class SequenceServiceImpl implements SequenceService {
 	private SequenceRepository sequenceRepository;
 	
 	public String getSequence(String tableName) {
-		Sequence result = sequenceRepository.selectSequence(tableName);
+		SequenceEntity result = sequenceRepository.selectSequence(tableName);
 		Integer id = result.getId();
 		id++;
-		UserDto userDto = AuthenticationUtil.getUserDto();
-		Sequence param =  new Sequence();
+		SequenceEntity param =  new SequenceEntity();
 		param.setId(id);
 		param.setTableName(tableName);
 		param.setUpdateDate(OperationDateUtil.getDate());
-		param.setUpdateUser(userDto.getId());
 		sequenceRepository.updateSequence(param);
 		String paddedId = String.format("%" + result.getLength() + "s", id, result.getPaddingChar())
 				.replace(" ", result.getPaddingChar());

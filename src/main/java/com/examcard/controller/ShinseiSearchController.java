@@ -1,21 +1,17 @@
 package com.examcard.controller;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.examcard.component.common.CodeList;
-import com.examcard.controller.form.ShinseiSearchForm;
+import com.examcard.constant.ErrorCode;
+import com.examcard.dto.ShinseiSearchInputDto;
+import com.examcard.dto.ShinseiSearchOutputDto;
+import com.examcard.exception.BusinessException;
 import com.examcard.service.ShinseiSearchService;
-import com.examcard.service.dto.ShinseiSearchInputDto;
-import com.examcard.service.dto.ShinseiSearchOutputDto;
 
 import jakarta.validation.Valid;
 
@@ -24,56 +20,25 @@ import jakarta.validation.Valid;
  *
  * @author mhama
  */
-@Controller
-@RequestMapping(value = "/application/search01")
-@SessionAttributes(value = "applicationSearch01Form", types = { ShinseiSearchForm.class })
+@RestController
+@RequestMapping(value = "/shinsei/search")
 public class ShinseiSearchController {
 
 	@Autowired
 	private CodeList codeList;
 
 	@Autowired
-	private ShinseiSearchService applicationSearch01Service;
+	private ShinseiSearchService shinseiSearchService;
 
-	@ModelAttribute(name = "applicationSearch01Form")
-	public ShinseiSearchForm getApplicationSearch01Form() {
-		return new ShinseiSearchForm();
-	}
-
-	@GetMapping(value = { "", "/" })
-	public String init(SessionStatus sessionStatus) {
-		sessionStatus.setComplete();
-		return "redirect:/application/search01/index";
-	}
-
-	@GetMapping(value = { "/index" })
-	public String index(Model model, SessionStatus sessionStatus) {
-		sessionStatus.setComplete();
-		ShinseiSearchOutputDto outputDto = new ShinseiSearchOutputDto();
-		outputDto.setApplicationStatus(codeList.getApplicationStatus());
-		model.addAttribute("applicationSearch01Form", new ShinseiSearchForm());
-		model.addAttribute("outputDto", outputDto);
-		return "application/search01/index";
-	}
-
-	@GetMapping(value = "/search")
-	public String search(@Valid ShinseiSearchForm applicationSearch01Form, BindingResult result, Model model) {
+	@GetMapping(value = "/execute")
+	public ShinseiSearchOutputDto search(@Valid ShinseiSearchInputDto inputDto, BindingResult result) {
 		if (result.hasErrors()) {
-			ShinseiSearchOutputDto outputDto = new ShinseiSearchOutputDto();
-			outputDto.setApplicationStatus(codeList.getApplicationStatus());
-			model.addAttribute("outputDto", outputDto);
-			return "application/search01/index";
+			throw new BusinessException(ErrorCode.W400001.getCode());
 		}
-
-		ShinseiSearchInputDto inputDto = new ShinseiSearchInputDto();
-		BeanUtils.copyProperties(applicationSearch01Form, inputDto);
-
-		ShinseiSearchOutputDto outputDto = applicationSearch01Service.search(inputDto);
+		ShinseiSearchOutputDto outputDto = shinseiSearchService.search(inputDto);
 		outputDto.setApplicationStatus(codeList.getApplicationStatus());
-		applicationSearch01Form.setPageCount(outputDto.getPageCount());
-		applicationSearch01Form.setPageSize(outputDto.getPageSize());
-
-		model.addAttribute("outputDto", outputDto);
-		return "application/search01/index";
+		outputDto.setPageCount(outputDto.getPageCount());
+		outputDto.setPageSize(outputDto.getPageSize());
+		return outputDto;
 	}
 }

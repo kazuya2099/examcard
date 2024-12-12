@@ -1,26 +1,22 @@
 package com.examcard.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.examcard.controller.form.LoginForm;
+import com.examcard.dto.LoginInputDto;
+import com.examcard.dto.LoginOutputDto;
+import com.examcard.service.LoginService;
 
-@Controller
-@SessionAttributes("userDto")
+@RestController
 public class LoginContoller {
 
-	@GetMapping(value = {"/login"})
-	public String index(Model model, LoginForm loginForm) {
-		model.addAttribute(loginForm);
-		return "login/index";
-	}
+	@Autowired
+	private LoginService loginService;
 
-	@PostMapping({"/login/error"})
-	public String error(Model model, LoginForm loginForm) {
-		model.addAttribute(loginForm);
-		return "login/error";
+	@GetMapping(value = {"/login"})
+	public LoginOutputDto index(LoginInputDto inputDto) {
+		LoginOutputDto outputDto = loginService.execute(inputDto);
+		return outputDto;
 	}
 }

@@ -7,24 +7,22 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.examcard.component.common.MessageHelper;
+import com.examcard.dto.ShinseiDto;
+import com.examcard.dto.ShinseiSearchAdminInputDto;
+import com.examcard.dto.ShinseiSearchAdminOutputDto;
 import com.examcard.exception.BusinessException;
-import com.examcard.repository.CustomerApplicationRepository;
-import com.examcard.repository.entity.CustomerApplication;
-import com.examcard.repository.entity.CustomerApplicationSearchParam;
+import com.examcard.repository.ShinseiRepository;
+import com.examcard.repository.entity.ShinseiEntity;
+import com.examcard.repository.entity.ShinseiSerchParamEntity;
 import com.examcard.service.ShinseiSearchAdminService;
-import com.examcard.service.dto.ShinseiDto;
-import com.examcard.service.dto.ShinseiSearchAdminInputDto;
-import com.examcard.service.dto.ShinseiSearchAdminOutputDto;
 
 @Service
-@Transactional
 public class ShinseiSearchAdminServiceImpl implements ShinseiSearchAdminService {
 
 	@Autowired
-	private CustomerApplicationRepository customerApplicationRepository;
+	private ShinseiRepository shinseiRepository;
 	
 	@Autowired
 	private MessageHelper messageHelper;
@@ -48,29 +46,28 @@ public class ShinseiSearchAdminServiceImpl implements ShinseiSearchAdminService 
 					"business.error.search.max.count", new String[] {String.valueOf(SEARCH_MAX_COUNT)}));
 		}
 		
-		CustomerApplicationSearchParam searchParam = new CustomerApplicationSearchParam();
+		ShinseiSerchParamEntity searchParam = new ShinseiSerchParamEntity();
 		BeanUtils.copyProperties(inputDto, searchParam);
 		searchParam.setStart((pageNo - 1) * PAGENATION_SIZE);
 		searchParam.setEnd(PAGENATION_SIZE);
-		List<CustomerApplication> customerApplications = customerApplicationRepository.selectForJudgement(searchParam);
-		List<ShinseiDto> customerApplicationDtoList = customerApplications.stream().map(customerApplication -> {
-			ShinseiDto applicationDto = new ShinseiDto();
-			BeanUtils.copyProperties(customerApplication, applicationDto);
-			return applicationDto;
-		}).collect(Collectors.toList());
-			
+		List<ShinseiEntity> shinseiEntityList = shinseiRepository.selectForJudgement(searchParam);
+		List<ShinseiDto> shinseiDtoList = shinseiEntityList.stream().map(e -> {
+			ShinseiDto shinseiDto = new ShinseiDto();
+			BeanUtils.copyProperties(e, shinseiDto);
+			return shinseiDto;
+			}).collect(Collectors.toList());
 		ShinseiSearchAdminOutputDto outputDto = new ShinseiSearchAdminOutputDto();
 		outputDto.setPageNo(pageNo);
 		outputDto.setPageCount(pageCount);
 		outputDto.setPageSize(PAGENATION_SIZE);
 		outputDto.setSearchCount(searchCount);
-		outputDto.setCustomerApplicationDtoList(customerApplicationDtoList);
+		outputDto.setCustomerApplicationDtoList(shinseiDtoList);
 		return outputDto;
 	}
 
 	private long count(ShinseiSearchAdminInputDto inputDto) {
-		CustomerApplication customerApplication = new CustomerApplication();
+		ShinseiEntity customerApplication = new ShinseiEntity();
 		BeanUtils.copyProperties(inputDto, customerApplication);
-		return customerApplicationRepository.countForJudgement(customerApplication);
+		return shinseiRepository.countForJudgement(customerApplication);
 	}
 }

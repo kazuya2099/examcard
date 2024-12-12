@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.examcard.repository.entity.Information;
+import com.examcard.repository.entity.InformationEntity;
 
 @Mapper
 public interface InformationMapper {
-	List<Information> selectByDate(Date systemDate);
+	List<InformationEntity> selectByDate(Date systemDate);
 }
