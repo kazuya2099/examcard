@@ -1,12 +1,17 @@
 package com.examcard.repository.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class SequenceEntity {
+@EqualsAndHashCode(callSuper=true)
+public class SequenceEntity extends BaseEntity implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String tableName;
 	private Integer id;
 	private String paddingChar;

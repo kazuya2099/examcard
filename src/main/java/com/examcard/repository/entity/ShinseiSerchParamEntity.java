@@ -1,9 +1,16 @@
 package com.examcard.repository.entity;
 
+import java.io.Serializable;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class ShinseiSerchParamEntity {
+@EqualsAndHashCode(callSuper=true)
+public class ShinseiSerchParamEntity extends BaseEntity implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String firstname;
 	private String lastname;
 	private String lastnameKana;

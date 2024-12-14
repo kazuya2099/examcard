@@ -1,66 +1,65 @@
 package com.examcard.exception;
 
-/**
- * Exception to indicate that it has detected a condition that should not occur when the system is running normally.<br>
- * <p>
- * System exception is to be thrown if something that must exist, is not there (like file, directory, master data etc)
- * </p>
- */
-public class SystemException extends RuntimeException implements ExceptionCodeProvider {
+import org.jboss.logging.Logger;
 
-	private static final long serialVersionUID = 1L;
+import com.examcard.constant.ErrorCode;
 
+public class SystemException extends RuntimeException {
+
+
+	Logger logger = Logger.getLogger(SystemException.class);
+	
 	/**
-	 * exception code.
+	 * エラーコード
 	 */
-	private final String code;
-
+	private String code;
+	
 	/**
-	 * Constructor<br>
-	 * <p>
-	 * {@link ExceptionCodeProvider}, message to be displayed and underlying cause of exception can be specified.
-	 * </p>
-	 * @param code ExceptionCode {@link ExceptionCodeProvider}
-	 * @param message message to be displayed
-	 * @param cause underlying cause of exception
+	 * エラーメッセージ
 	 */
+	private String message;
+
 	public SystemException(String code, String message, Throwable cause) {
 		super(message, cause);
 		this.code = code;
+		this.message = message;
+		logger.error(message, cause);
 	}
 
-	/**
-	 * Constructor<br>
-	 * <p>
-	 * {@link ExceptionCodeProvider}, message to be displayed can be specified.
-	 * </p>
-	 * @param code ExceptionCode {@link ExceptionCodeProvider}
-	 * @param message message to be displayed
-	 */
-	public SystemException(String code, String message) {
+	public SystemException(String code, String message, String className) {
 		super(message);
 		this.code = code;
+		this.message = message;
+		logger.error(String.format("エラーコード = %s: エラーメッセージ = %s: クラス = %s", this.code, this.message, className));
 	}
 
-	/**
-	 * Constructor<br>
-	 * <p>
-	 * {@link ExceptionCodeProvider} and underlying cause of exception can be specified.
-	 * </p>
-	 * @param code ExceptionCode {@link ExceptionCodeProvider}
-	 * @param cause underlying cause of exception
-	 */
-	public SystemException(String code, Throwable cause) {
-		super(cause);
+	public SystemException(ErrorCode errorCode, Throwable cause) {
+		super(errorCode.getMessage(), cause);
+		this.code = errorCode.getCode();
+		this.message = errorCode.getMessage();
+		logger.error(String.format("エラーコード = %s: エラーメッセージ = %s", this.code, this.message, cause));
+	}
+	
+	public SystemException(ErrorCode errorCode, String className) {
+		super(errorCode.getMessage());
+		this.code = errorCode.getCode();
+		this.message = errorCode.getMessage();
+		logger.error(String.format("エラーコード = %s: エラーメッセージ = %s: クラス = %s", this.code, this.message, className));
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
 		this.code = code;
 	}
 
-	/**
-	 * Returns the {@link ExceptionCodeProvider}
-	 * @see org.terasoluna.gfw.common.exception.ExceptionCodeProvider#getCode()
-	 */
-	@Override
-	public String getCode() {
-		return code;
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

@@ -1,77 +1,25 @@
 package com.examcard.dto;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 
-import org.hibernate.validator.constraints.Length;
-
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class LoginOutputDto {
+@EqualsAndHashCode(callSuper=true)
+public class LoginOutputDto extends BaseDto implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String id;
-	private String firstname;
-	private String lastname;
-	private String lastnameKana;
-	private String firstnameKana;
-	@NotBlank
-	@Length(max=3)
-	private String zip1;
-	@NotBlank
-	@Length(max=4)
-	private String zip2;
-	@NotBlank
-	@Length(max=4)
-	private String addressPrefecture;
-	@NotBlank
-	@Length(max=80)
-	private String addressCity;
-	@NotBlank
-	@Length(max=80)
-	private String addressOoaza;
-	@Length(max=80)
-	private String addressAza;
-	@Length(max=80)
-	private String addressOther;
-	@NotBlank
-	@Length(max=4)
-	private String tel1;
-	@NotBlank
-	@Length(max=4)
-	private String tel2;
-	@NotBlank
-	@Length(max=4)
-	private String tel3;
-	@Length(max=4)
-	private String mobileTel1;
-	@Length(max=4)
-	private String mobileTel2;
-	@Length(max=4)
-	private String mobileTel3;
-	@Email
-	@Length(max=255)
-	private String email;
-	private String setaiFamily;
-	private String setaiCount;
-	private String setaiStatus;
-	private String setaiYear;
-	private String setaiLoan;
-	private BigDecimal income;
-	private BigDecimal savings;
-	private String employmentStatus;
-	private String companyName;
-	private String companyZip1;
-	private String companyZip2;
-	private String companyAddressPrefecture;
-	private String companyAddressCity;
-	private String companyAddressOoaza;
-	private String companyAddressAza;
-	private String companyAddressOther;
-	private String companyTel1;
-	private String companyTel2;
-	private String companyTel3;
-	private String companyDepartment;
-	private String companyIndustryType;
-	private String companyWorkYears;
+	private String sei;
+	private String mei;
+	private String seiKana;
+	private String meiKana;
+	private String address1;
+	private String address2;
+	private String address3;
+	private String address4;
+	private String mail;
+	private String tel;
 }
