@@ -13,6 +13,11 @@ import com.examcard.repository.UserRepository;
 import com.examcard.repository.entity.UserEntity;
 import com.examcard.service.LoginService;
 
+/**
+ * ログインサービス 実装クラス.
+ * 
+ * @author Masanao Hamada
+ */
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -20,7 +25,10 @@ public class LoginServiceImpl implements LoginService {
 	private UserRepository userRepository;
 
 	/**
-	 * ログイン処理を実行
+	 * ログインサービス実行メソッド.
+	 * 
+	 * @param inputDto ログインインプットDTO
+	 * @return ログインアウトプットDTO
 	 */
 	public LoginOutputDto execute(LoginInputDto inputDto) {
 		UserEntity userEntity = userRepository.selectUser(inputDto.getMail(), inputDto.getPassword());

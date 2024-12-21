@@ -12,7 +12,9 @@ import com.examcard.constant.ErrorCode;
 import com.examcard.dto.BaseDto;
 
 /**
- * 業務エラー例外クラス
+ * 業務エラー例外クラス.
+ * 
+ * @author Masanao Hamada
  */
 public class BusinessException extends RuntimeException {
 
@@ -21,8 +23,10 @@ public class BusinessException extends RuntimeException {
 	/** DTO基底クラス */
 	private BaseDto baseDto = new BaseDto();
 	
+	/** Httpステータスコード */
 	private int status = 0;
 
+	/** メッセージソース */
 	private ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 
 	{
@@ -34,12 +38,13 @@ public class BusinessException extends RuntimeException {
 	 * コンストラクタ
 	 * 
 	 * @param errorCode エラーコード
+	 * @param className クラス名
 	 */
 	public BusinessException(ErrorCode errorCode, String className) {
 		super(errorCode.getMessage());
-		status = errorCode.getStatus();
-		baseDto.setCode(errorCode.getCode());
-		baseDto.setMessage(errorCode.getMessage());
+		this.status = errorCode.getStatus();
+		this.baseDto.setCode(errorCode.getCode());
+		this.baseDto.setMessage(errorCode.getMessage());
 		logger.warn(String.format("エラーコード = %s, エラーメッセージ = %s, クラス = %s", errorCode.getCode(), errorCode.getMessage(),
 				className));
 	}
@@ -47,8 +52,10 @@ public class BusinessException extends RuntimeException {
 	/**
 	 * コンストラクタ
 	 * 
+	 * @param status Httpステータスコード
 	 * @param code エラーコード
 	 * @param message エラーメッセージ
+	 * @param className クラス名
 	 */
 	public BusinessException(int status, String code, String message, String className) {
 		super(message);
@@ -61,6 +68,7 @@ public class BusinessException extends RuntimeException {
 	/**
 	 * コンストラクタ
 	 * 
+	 * @param status Httpステータスコード
 	 * @param code エラーコード
 	 * @param message エラーメッセージ
 	 * @param cause 例外
@@ -77,6 +85,7 @@ public class BusinessException extends RuntimeException {
 	 * コンストラクタ(バリデーションエラー)
 	 * 
 	 * @param errorCode エラーコード
+	 * @param className クラス名
 	 */
 	public BusinessException(ErrorCode errorCode, List<ObjectError> errors, String className) {
 		super(errorCode.getMessage());

@@ -13,6 +13,11 @@ import com.examcard.dto.LoginOutputDto;
 import com.examcard.exception.BusinessException;
 import com.examcard.service.LoginService;
 
+/**
+ * ログインコントローラー.
+ * 
+ * @author Masanao Hamada
+ */
 @RestController
 public class LoginContoller {
 

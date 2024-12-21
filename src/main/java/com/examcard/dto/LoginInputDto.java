@@ -5,6 +5,11 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * ログインインプットDTO
+ * 
+ * @author Masanao Hamada
+ */
 @Data
 @EqualsAndHashCode(callSuper=true)
 public class LoginInputDto extends BaseDto {

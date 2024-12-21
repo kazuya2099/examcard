@@ -1,7 +1,9 @@
 package com.examcard.constant;
 
 /**
- * エラーコード定義
+ * エラーコード定義.
+ * 
+ * @author Masanao Hamada
  */
 public enum ErrorCode {
 
