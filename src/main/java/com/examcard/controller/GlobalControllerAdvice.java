@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.examcard.constant.ErrorCode;
-import com.examcard.dto.BaseDto;
+import com.examcard.controller.dto.ContollerIBaseDto;
 import com.examcard.exception.BusinessException;
 import com.examcard.exception.SystemException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -34,7 +34,7 @@ public class GlobalControllerAdvice {
 	 */
 	@ExceptionHandler({ BusinessException.class })
 	public ResponseEntity<String> handleBusinessException(BusinessException e) {
-		return getResponseEnity(e.getStatus(), e.getBaseDto());
+		return getResponseEnity(e.getStatus(), e.getContollerIBaseDto());
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class GlobalControllerAdvice {
 	 */
 	@ExceptionHandler({ SystemException.class })
 	public ResponseEntity<String> handleSystemException(SystemException e) {
-		return getResponseEnity(e.getStatus(), e.getBaseDto());
+		return getResponseEnity(e.getStatus(), e.getContollerIBaseDto());
 	}
 
 	/**
@@ -58,10 +58,10 @@ public class GlobalControllerAdvice {
 	 */
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<String> handleException(Exception e) {
-		BaseDto baseDto = new BaseDto();
-		baseDto.setCode(ErrorCode.E500000.getCode());
-		baseDto.setMessage(ErrorCode.E500000.getMessage());
-		return getResponseEnity(ErrorCode.E500000.getStatus(), baseDto);
+		ContollerIBaseDto contollerIBaseDto = new ContollerIBaseDto();
+		contollerIBaseDto.setCode(ErrorCode.E500000.getCode());
+		contollerIBaseDto.setMessage(ErrorCode.E500000.getMessage());
+		return getResponseEnity(ErrorCode.E500000.getStatus(), contollerIBaseDto);
 	}
 
 	/**
@@ -72,13 +72,13 @@ public class GlobalControllerAdvice {
 	 * @return レスポンスエンティティ
 	 * @throws JsonProcessingException
 	 */
-	private ResponseEntity<String> getResponseEnity(int status, BaseDto baseDto) {
+	private ResponseEntity<String> getResponseEnity(int status, ContollerIBaseDto contollerIBaseDto) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonString;
 		try {
-			jsonString = objectMapper.writeValueAsString(baseDto);
+			jsonString = objectMapper.writeValueAsString(contollerIBaseDto);
 		} catch (JsonProcessingException e) {
 			logger.error(e);
 			jsonString = "{\"code\":\"500000\", \"message\": \"システムエラー\"}";

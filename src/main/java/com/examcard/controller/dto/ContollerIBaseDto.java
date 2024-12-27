@@ -1,4 +1,4 @@
-package com.examcard.dto;
+package com.examcard.controller.dto;
 
 import com.examcard.constant.ErrorCode;
 
@@ -10,7 +10,7 @@ import lombok.Data;
  * @author Masanao Hamada
  */
 @Data
-public class BaseDto {
+public class ContollerIBaseDto {
 	
 	/** レスポンスの結果を返す */
 	private String code;
@@ -21,7 +21,7 @@ public class BaseDto {
 	/**
 	 * コンストラクタ.
 	 */
-	public BaseDto() {
+	public ContollerIBaseDto() {
 		this.setCode(ErrorCode.I200000.getCode());
 		this.setMessage(ErrorCode.I200000.getMessage());
 	}

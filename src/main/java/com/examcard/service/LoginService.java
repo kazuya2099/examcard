@@ -1,7 +1,7 @@
 package com.examcard.service;
 
-import com.examcard.dto.LoginInputDto;
-import com.examcard.dto.LoginOutputDto;
+import com.examcard.service.dto.LoginInputDto;
+import com.examcard.service.dto.LoginOutputDto;
 
 /**
  * ログインサービス インターフェース.

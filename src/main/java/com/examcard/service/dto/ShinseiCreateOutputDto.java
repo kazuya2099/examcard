@@ -1,4 +1,4 @@
-package com.examcard.dto;
+package com.examcard.service.dto;
 
 public class ShinseiCreateOutputDto {
 

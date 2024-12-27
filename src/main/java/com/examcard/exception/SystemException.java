@@ -4,7 +4,7 @@ import org.jboss.logging.Logger;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 import com.examcard.constant.ErrorCode;
-import com.examcard.dto.BaseDto;
+import com.examcard.controller.dto.ContollerIBaseDto;
 
 /**
  * システムエラー例外クラス.
@@ -16,7 +16,7 @@ public class SystemException extends RuntimeException {
 	Logger logger = Logger.getLogger(SystemException.class);
 
 	/** DTO基底クラス */
-	private BaseDto baseDto = new BaseDto();
+	private ContollerIBaseDto contollerIBaseDto = new ContollerIBaseDto();
 
 	/** Httpステータスコード */
 	private int status = 0;
@@ -40,8 +40,8 @@ public class SystemException extends RuntimeException {
 	public SystemException(int status, String code, String message, Throwable cause) {
 		super(message, cause);
 		this.status = status;
-		this.baseDto.setCode(code);
-		this.baseDto.setMessage(message);
+		this.contollerIBaseDto.setCode(code);
+		this.contollerIBaseDto.setMessage(message);
 		logger.error(message, cause);
 	}
 
@@ -56,8 +56,8 @@ public class SystemException extends RuntimeException {
 	public SystemException(int status, String code, String message, String className) {
 		super(message);
 		this.status = status;
-		this.baseDto.setCode(code);
-		this.baseDto.setMessage(message);
+		this.contollerIBaseDto.setCode(code);
+		this.contollerIBaseDto.setMessage(message);
 		logger.error(String.format("エラーコード = %s: エラーメッセージ = %s: クラス = %s", code, message, className));
 	}
 
@@ -70,8 +70,8 @@ public class SystemException extends RuntimeException {
 	public SystemException(ErrorCode errorCode, Throwable cause) {
 		super(errorCode.getMessage(), cause);
 		this.status = errorCode.getStatus();
-		this.baseDto.setCode(errorCode.getCode());
-		this.baseDto.setMessage(errorCode.getMessage());
+		this.contollerIBaseDto.setCode(errorCode.getCode());
+		this.contollerIBaseDto.setMessage(errorCode.getMessage());
 		logger.error(String.format("エラーコード = %s: エラーメッセージ = %s", errorCode.getCode(), errorCode.getMessage(), cause));
 	}
 
@@ -84,18 +84,18 @@ public class SystemException extends RuntimeException {
 	public SystemException(ErrorCode errorCode, String className) {
 		super(errorCode.getMessage());
 		this.status = errorCode.getStatus();
-		this.baseDto.setCode(errorCode.getCode());
-		this.baseDto.setMessage(errorCode.getMessage());
+		this.contollerIBaseDto.setCode(errorCode.getCode());
+		this.contollerIBaseDto.setMessage(errorCode.getMessage());
 		logger.error(String.format("エラーコード = %s: エラーメッセージ = %s: クラス = %s", errorCode.getCode(), errorCode.getMessage(),
 				className));
 	}
 
-	public BaseDto getBaseDto() {
-		return baseDto;
+	public ContollerIBaseDto getContollerIBaseDto() {
+		return contollerIBaseDto;
 	}
 
-	public void setBaseDto(BaseDto baseDto) {
-		this.baseDto = baseDto;
+	public void setContollerIBaseDto(ContollerIBaseDto contollerIBaseDto) {
+		this.contollerIBaseDto = contollerIBaseDto;
 	}
 
 	public int getStatus() {

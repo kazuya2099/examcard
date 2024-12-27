@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.examcard.constant.ErrorCode;
-import com.examcard.dto.LoginInputDto;
-import com.examcard.dto.LoginOutputDto;
 import com.examcard.exception.BusinessException;
 import com.examcard.repository.UserRepository;
 import com.examcard.repository.entity.UserEntity;
 import com.examcard.service.LoginService;
+import com.examcard.service.dto.LoginInputDto;
+import com.examcard.service.dto.LoginOutputDto;
 
 /**
  * ログインサービス 実装クラス.
