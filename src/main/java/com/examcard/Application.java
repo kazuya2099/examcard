@@ -28,6 +28,7 @@ public class Application implements WebMvcConfigurer {
 	}
 
 	@Bean(name="localValidatorFactoryBean")
+	@Override
 	public Validator getValidator() {
 		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
 		bean.setValidationMessageSource(getMessageSource());
