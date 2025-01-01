@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=true)
-public class LoginContollerOutputDto extends ContollerIBaseDto implements Serializable {
+public class LoginContollerOutputDto extends ContollerBaseDto implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	

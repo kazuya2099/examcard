@@ -1,7 +1,6 @@
 package com.examcard.controller;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +23,11 @@ import com.examcard.service.dto.LoginOutputDto;
 @RestController
 public class LoginContoller {
 
-	@Autowired
 	private LoginService loginService;
+	
+	LoginContoller(LoginService loginService) {
+		this.loginService = loginService;
+	}
 
 	@GetMapping(value = {"/login"})
 	public LoginContollerOutputDto index(@RequestBody @Validated LoginContollerInputDto loginContollerInputDto, BindingResult result) {
@@ -34,8 +36,7 @@ public class LoginContoller {
 		}
 		LoginInputDto loginInputDto = getInputDto(loginContollerInputDto);
 		LoginOutputDto loginOutputDto = loginService.execute(loginInputDto);
-		LoginContollerOutputDto loginContollerOutputDto = getControllerOutputDto(loginOutputDto);
-		return loginContollerOutputDto;
+		return getControllerOutputDto(loginOutputDto);
 	}
 	
 	/**

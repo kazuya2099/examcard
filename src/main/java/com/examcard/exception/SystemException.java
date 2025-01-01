@@ -4,7 +4,7 @@ import org.jboss.logging.Logger;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 import com.examcard.constant.ErrorCode;
-import com.examcard.controller.dto.ContollerIBaseDto;
+import com.examcard.controller.dto.ContollerBaseDto;
 
 /**
  * システムエラー例外クラス.
@@ -13,18 +13,18 @@ import com.examcard.controller.dto.ContollerIBaseDto;
  */
 public class SystemException extends RuntimeException {
 
-	Logger logger = Logger.getLogger(SystemException.class);
+	private final Logger logger = Logger.getLogger(SystemException.class);
 
 	/** DTO基底クラス */
-	private ContollerIBaseDto contollerIBaseDto = new ContollerIBaseDto();
+	private ContollerBaseDto contollerBaseDto = new ContollerBaseDto();
 
 	/** Httpステータスコード */
-	private int status = 0;
+	private int status;
 
 	/** メッセージソース */
-	private ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+	private transient ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 
-	{
+	public SystemException() {
 		messageSource.setBasename("classpath:messages");
 		messageSource.setDefaultEncoding("UTF-8");
 	}
@@ -40,8 +40,8 @@ public class SystemException extends RuntimeException {
 	public SystemException(int status, String code, String message, Throwable cause) {
 		super(message, cause);
 		this.status = status;
-		this.contollerIBaseDto.setCode(code);
-		this.contollerIBaseDto.setMessage(message);
+		this.contollerBaseDto.setCode(code);
+		this.contollerBaseDto.setMessage(message);
 		logger.error(message, cause);
 	}
 
@@ -56,8 +56,8 @@ public class SystemException extends RuntimeException {
 	public SystemException(int status, String code, String message, String className) {
 		super(message);
 		this.status = status;
-		this.contollerIBaseDto.setCode(code);
-		this.contollerIBaseDto.setMessage(message);
+		this.contollerBaseDto.setCode(code);
+		this.contollerBaseDto.setMessage(message);
 		logger.error(String.format("エラーコード = %s: エラーメッセージ = %s: クラス = %s", code, message, className));
 	}
 
@@ -70,8 +70,8 @@ public class SystemException extends RuntimeException {
 	public SystemException(ErrorCode errorCode, Throwable cause) {
 		super(errorCode.getMessage(), cause);
 		this.status = errorCode.getStatus();
-		this.contollerIBaseDto.setCode(errorCode.getCode());
-		this.contollerIBaseDto.setMessage(errorCode.getMessage());
+		this.contollerBaseDto.setCode(errorCode.getCode());
+		this.contollerBaseDto.setMessage(errorCode.getMessage());
 		logger.error(String.format("エラーコード = %s: エラーメッセージ = %s", errorCode.getCode(), errorCode.getMessage(), cause));
 	}
 
@@ -84,25 +84,17 @@ public class SystemException extends RuntimeException {
 	public SystemException(ErrorCode errorCode, String className) {
 		super(errorCode.getMessage());
 		this.status = errorCode.getStatus();
-		this.contollerIBaseDto.setCode(errorCode.getCode());
-		this.contollerIBaseDto.setMessage(errorCode.getMessage());
+		this.contollerBaseDto.setCode(errorCode.getCode());
+		this.contollerBaseDto.setMessage(errorCode.getMessage());
 		logger.error(String.format("エラーコード = %s: エラーメッセージ = %s: クラス = %s", errorCode.getCode(), errorCode.getMessage(),
 				className));
 	}
 
-	public ContollerIBaseDto getContollerIBaseDto() {
-		return contollerIBaseDto;
-	}
-
-	public void setContollerIBaseDto(ContollerIBaseDto contollerIBaseDto) {
-		this.contollerIBaseDto = contollerIBaseDto;
+	public ContollerBaseDto getContollerBaseDto() {
+		return contollerBaseDto;
 	}
 
 	public int getStatus() {
 		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
 	}
 }

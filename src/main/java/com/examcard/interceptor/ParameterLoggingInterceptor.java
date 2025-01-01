@@ -31,15 +31,17 @@ public class ParameterLoggingInterceptor implements WebRequestInterceptor {
 		}
 		
 		StringJoiner join = new StringJoiner(", ", "[", "]");
-		params.forEach(e -> join.add(e));
+		params.forEach(join::add);
 		logger.info(join.toString());
 	}
 
 	@Override
 	public void postHandle(WebRequest paramWebRequest, ModelMap paramModelMap) throws Exception {
+		// 未使用
 	}
 
 	@Override
 	public void afterCompletion(WebRequest paramWebRequest, Exception paramException) throws Exception {
+		// 未使用
 	}
 }

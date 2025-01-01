@@ -9,7 +9,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.validation.ObjectError;
 
 import com.examcard.constant.ErrorCode;
-import com.examcard.controller.dto.ContollerIBaseDto;
+import com.examcard.controller.dto.ContollerBaseDto;
 
 /**
  * 業務エラー例外クラス.
@@ -18,18 +18,18 @@ import com.examcard.controller.dto.ContollerIBaseDto;
  */
 public class BusinessException extends RuntimeException {
 
-	Logger logger = Logger.getLogger(BusinessException.class);
+	private final Logger logger = Logger.getLogger(BusinessException.class);
 
 	/** DTO基底クラス */
-	private ContollerIBaseDto contollerIBaseDto = new ContollerIBaseDto();
-	
+	private ContollerBaseDto contollerBaseDto = new ContollerBaseDto();
+
 	/** Httpステータスコード */
-	private int status = 0;
+	private int status;
 
 	/** メッセージソース */
-	private ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+	private transient ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 
-	{
+	public BusinessException() {
 		messageSource.setBasename("classpath:messages");
 		messageSource.setDefaultEncoding("UTF-8");
 	}
@@ -43,8 +43,8 @@ public class BusinessException extends RuntimeException {
 	public BusinessException(ErrorCode errorCode, String className) {
 		super(errorCode.getMessage());
 		this.status = errorCode.getStatus();
-		this.contollerIBaseDto.setCode(errorCode.getCode());
-		this.contollerIBaseDto.setMessage(errorCode.getMessage());
+		this.contollerBaseDto.setCode(errorCode.getCode());
+		this.contollerBaseDto.setMessage(errorCode.getMessage());
 		logger.warn(String.format("エラーコード = %s, エラーメッセージ = %s, クラス = %s", errorCode.getCode(), errorCode.getMessage(),
 				className));
 	}
@@ -60,8 +60,8 @@ public class BusinessException extends RuntimeException {
 	public BusinessException(int status, String code, String message, String className) {
 		super(message);
 		this.status = status;
-		this.contollerIBaseDto.setCode(code);
-		this.contollerIBaseDto.setMessage(message);
+		this.contollerBaseDto.setCode(code);
+		this.contollerBaseDto.setMessage(message);
 		logger.warn(String.format("エラーコード = %s, エラーメッセージ = %s, クラス = %s", code, message, className));
 	}
 
@@ -76,8 +76,8 @@ public class BusinessException extends RuntimeException {
 	public BusinessException(int status, String code, String message, Throwable cause) {
 		super(message, cause);
 		this.status = status;
-		this.contollerIBaseDto.setCode(code);
-		this.contollerIBaseDto.setMessage(message);
+		this.contollerBaseDto.setCode(code);
+		this.contollerBaseDto.setMessage(message);
 		logger.warn(String.format("エラーコード = %s, エラーメッセージ = %s", code, message));
 	}
 
@@ -92,8 +92,8 @@ public class BusinessException extends RuntimeException {
 		this.status = errorCode.getStatus();
 		String validationErrorMessage = errors.stream().map(e -> messageSource.getMessage(e, Locale.getDefault()))
 				.collect(Collectors.joining(", "));
-		this.contollerIBaseDto.setCode(errorCode.getCode());
-		this.contollerIBaseDto.setMessage(validationErrorMessage);
+		this.contollerBaseDto.setCode(errorCode.getCode());
+		this.contollerBaseDto.setMessage(validationErrorMessage);
 		logger.warn(
 				String.format("エラーコード = %s, エラーメッセージ = %s, クラス = %s", errorCode.getCode(), validationErrorMessage,
 						className));
@@ -103,15 +103,7 @@ public class BusinessException extends RuntimeException {
 		return status;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
-	public ContollerIBaseDto getContollerIBaseDto() {
-		return contollerIBaseDto;
-	}
-
-	public void setContollerIBaseDto(ContollerIBaseDto contollerIBaseDto) {
-		this.contollerIBaseDto = contollerIBaseDto;
+	public ContollerBaseDto getContollerBaseDto() {
+		return contollerBaseDto;
 	}
 }

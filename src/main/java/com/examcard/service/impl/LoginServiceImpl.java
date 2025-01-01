@@ -2,7 +2,6 @@ package com.examcard.service.impl;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.examcard.constant.ErrorCode;
@@ -21,8 +20,11 @@ import com.examcard.service.dto.LoginOutputDto;
 @Service
 public class LoginServiceImpl implements LoginService {
 
-	@Autowired
 	private UserRepository userRepository;
+	
+	public LoginServiceImpl(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	/**
 	 * ログインサービス実行メソッド.

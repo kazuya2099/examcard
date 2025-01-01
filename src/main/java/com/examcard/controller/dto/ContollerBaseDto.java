@@ -1,5 +1,7 @@
 package com.examcard.controller.dto;
 
+import java.io.Serializable;
+
 import com.examcard.constant.ErrorCode;
 
 import lombok.Data;
@@ -10,7 +12,9 @@ import lombok.Data;
  * @author Masanao Hamada
  */
 @Data
-public class ContollerIBaseDto {
+public class ContollerBaseDto implements Serializable {
+	
+	private static final long serialVersionUID = 1L; 
 	
 	/** レスポンスの結果を返す */
 	private String code;
@@ -21,7 +25,7 @@ public class ContollerIBaseDto {
 	/**
 	 * コンストラクタ.
 	 */
-	public ContollerIBaseDto() {
+	public ContollerBaseDto() {
 		this.setCode(ErrorCode.I200000.getCode());
 		this.setMessage(ErrorCode.I200000.getMessage());
 	}

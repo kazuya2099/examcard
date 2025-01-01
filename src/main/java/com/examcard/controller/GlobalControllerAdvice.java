@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.examcard.constant.ErrorCode;
-import com.examcard.controller.dto.ContollerIBaseDto;
+import com.examcard.controller.dto.ContollerBaseDto;
 import com.examcard.exception.BusinessException;
 import com.examcard.exception.SystemException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class GlobalControllerAdvice {
 
 	Logger logger = Logger.getLogger(GlobalControllerAdvice.class);
-	
+
 	/**
 	 * 業務エラーハンドラ
 	 * 
@@ -34,7 +34,7 @@ public class GlobalControllerAdvice {
 	 */
 	@ExceptionHandler({ BusinessException.class })
 	public ResponseEntity<String> handleBusinessException(BusinessException e) {
-		return getResponseEnity(e.getStatus(), e.getContollerIBaseDto());
+		return getResponseEnity(e.getStatus(), e.getContollerBaseDto());
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class GlobalControllerAdvice {
 	 */
 	@ExceptionHandler({ SystemException.class })
 	public ResponseEntity<String> handleSystemException(SystemException e) {
-		return getResponseEnity(e.getStatus(), e.getContollerIBaseDto());
+		return getResponseEnity(e.getStatus(), e.getContollerBaseDto());
 	}
 
 	/**
@@ -58,10 +58,10 @@ public class GlobalControllerAdvice {
 	 */
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<String> handleException(Exception e) {
-		ContollerIBaseDto contollerIBaseDto = new ContollerIBaseDto();
-		contollerIBaseDto.setCode(ErrorCode.E500000.getCode());
-		contollerIBaseDto.setMessage(ErrorCode.E500000.getMessage());
-		return getResponseEnity(ErrorCode.E500000.getStatus(), contollerIBaseDto);
+		ContollerBaseDto contollerBaseDto = new ContollerBaseDto();
+		contollerBaseDto.setCode(ErrorCode.E500000.getCode());
+		contollerBaseDto.setMessage(ErrorCode.E500000.getMessage());
+		return getResponseEnity(ErrorCode.E500000.getStatus(), contollerBaseDto);
 	}
 
 	/**
@@ -72,19 +72,18 @@ public class GlobalControllerAdvice {
 	 * @return レスポンスエンティティ
 	 * @throws JsonProcessingException
 	 */
-	private ResponseEntity<String> getResponseEnity(int status, ContollerIBaseDto contollerIBaseDto) {
+	private ResponseEntity<String> getResponseEnity(int status, ContollerBaseDto contollerBaseDto) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonString;
 		try {
-			jsonString = objectMapper.writeValueAsString(contollerIBaseDto);
+			jsonString = objectMapper.writeValueAsString(contollerBaseDto);
 		} catch (JsonProcessingException e) {
 			logger.error(e);
 			jsonString = "{\"code\":\"500000\", \"message\": \"システムエラー\"}";
 		}
-		ResponseEntity<String> entity = new ResponseEntity<String>(jsonString, headers,
+		return new ResponseEntity<>(jsonString, headers,
 				HttpStatusCode.valueOf(status));
-		return entity;
 	}
 }

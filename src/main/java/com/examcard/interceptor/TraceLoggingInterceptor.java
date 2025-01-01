@@ -27,6 +27,7 @@ public class TraceLoggingInterceptor implements WebRequestInterceptor {
 	
 	@Override
 	public void afterCompletion(WebRequest paramWebRequest, Exception paramException) throws Exception {
+		// unused.
 	}
 
 	private String getMethodName(Object handler) {
