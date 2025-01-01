@@ -3,6 +3,7 @@ target/
 .project
 .factorypath
 *.log
+*.class
 .jsdtscope
 *.prefs
 *.component
@@ -10,3 +11,4 @@ target/
 *.name
 settings.json
 /ファイル/
+/bin/
