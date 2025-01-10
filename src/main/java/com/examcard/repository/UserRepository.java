@@ -6,7 +6,7 @@ import com.examcard.repository.entity.UserEntity;
  * ユーザーマスタ検索インターフェース
  */
 public interface UserRepository {
-	
+
 	/**
 	 * メールアドレスで検索
 	 * 
@@ -14,7 +14,7 @@ public interface UserRepository {
 	 * @return
 	 */
 	public UserEntity selectUser(String mail, String password);
-	
+
 	/**
 	 * IDで検索
 	 * 

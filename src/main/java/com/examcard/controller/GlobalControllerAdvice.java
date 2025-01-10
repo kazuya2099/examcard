@@ -34,6 +34,7 @@ public class GlobalControllerAdvice {
 	 */
 	@ExceptionHandler({ BusinessException.class })
 	public ResponseEntity<String> handleBusinessException(BusinessException e) {
+		logger.warn(e.getMessage(), e);
 		return getResponseEnity(e.getStatus(), e.getContollerBaseDto());
 	}
 
@@ -46,6 +47,7 @@ public class GlobalControllerAdvice {
 	 */
 	@ExceptionHandler({ SystemException.class })
 	public ResponseEntity<String> handleSystemException(SystemException e) {
+		logger.error(e.getMessage(), e);
 		return getResponseEnity(e.getStatus(), e.getContollerBaseDto());
 	}
 
@@ -58,6 +60,7 @@ public class GlobalControllerAdvice {
 	 */
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<String> handleException(Exception e) {
+		logger.error(e.getMessage(), e);
 		ContollerBaseDto contollerBaseDto = new ContollerBaseDto();
 		contollerBaseDto.setCode(ErrorCode.E500000.getCode());
 		contollerBaseDto.setMessage(ErrorCode.E500000.getMessage());
