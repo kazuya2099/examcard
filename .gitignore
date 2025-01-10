@@ -18,3 +18,4 @@ gradlew.bat
 /bin/
 logs/
 /build/
+/classes/

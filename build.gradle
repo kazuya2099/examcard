@@ -6,7 +6,17 @@
 
 plugins {
     id 'java'
+    id 'application'
+    id 'eclipse'
+    id 'io.spring.dependency-management'
     id "org.sonarqube" version "6.0.1.5171"
+    id 'com.gradle.develocity' version '3.18.1'
+    id 'org.openrewrite.rewrite' version '6.29.0'
+}
+
+rewrite {
+    activeRecipe("org.openrewrite.gradle.plugins.AddDevelocityGradlePlugin")
+    setExportDatatables(true)
 }
 
 repositories {
@@ -14,11 +24,23 @@ repositories {
     mavenCentral()
 }
 
-//java {
-//    toolchain {
-//        languageVersion = JavaLanguageVersion.of(21)
-//    }
-//}
+develocity.buildScan {
+    termsOfUseUrl = 'https://gradle.com/help/legal-terms-of-use'
+    termsOfUseAgree = 'no'
+}
+
+eclipse {
+  classpath {
+    defaultOutputDir = file('build/classes')
+    file.whenMerged { classpath ->
+      classpath.entries.findAll { entry ->
+        if (entry.kind == "src" && entry.hasProperty('output')) {
+          entry.output = 'build/classes'
+        }
+      }
+    }
+  }
+}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:3.1.3'
