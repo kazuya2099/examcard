@@ -9,13 +9,13 @@ plugins {
     id 'application'
     id 'eclipse'
     id 'io.spring.dependency-management'
-    id "org.sonarqube" version "6.0.1.5171"
+    id 'org.sonarqube" version "6.0.1.5171'
     id 'com.gradle.develocity' version '3.18.1'
     id 'org.openrewrite.rewrite' version '6.29.0'
 }
 
 rewrite {
-    activeRecipe("org.openrewrite.gradle.plugins.AddDevelocityGradlePlugin")
+    activeRecipe('org.openrewrite.gradle.plugins.AddDevelocityGradlePlugin')
     setExportDatatables(true)
 }
 
@@ -34,7 +34,7 @@ eclipse {
     defaultOutputDir = file('build/classes')
     file.whenMerged { classpath ->
       classpath.entries.findAll { entry ->
-        if (entry.kind == "src" && entry.hasProperty('output')) {
+        if (entry.kind == 'src' && entry.hasProperty('output')) {
           entry.output = 'build/classes'
         }
       }
