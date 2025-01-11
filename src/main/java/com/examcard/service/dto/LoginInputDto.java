@@ -1,18 +1,16 @@
 package com.examcard.service.dto;
 
-import java.io.Serializable;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- * ログインインプットDTO
+/* 
+* ログインインプットDTO
  * 
  * @author Masanao Hamada
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class LoginInputDto extends BaseDto implements Serializable {
+public class LoginInputDto extends BaseDto {
 	/* メールアドレス */
 	private String mail;
 	/* パスワード */

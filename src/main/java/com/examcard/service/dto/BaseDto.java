@@ -1,5 +1,7 @@
 package com.examcard.service.dto;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 /**
@@ -8,7 +10,10 @@ import lombok.Data;
  * @author Masanao Hamada
  */
 @Data
-public class BaseDto {
+public class BaseDto implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	/* 削除フラグ */
 	private String deleteFlag;
 	/* 作成者 */

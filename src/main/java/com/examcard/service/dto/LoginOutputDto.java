@@ -1,15 +1,11 @@
 package com.examcard.service.dto;
 
-import java.io.Serializable;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=true)
-public class LoginOutputDto extends BaseDto implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+public class LoginOutputDto extends BaseDto {
 	
 	private String id;
 	private String sei;
