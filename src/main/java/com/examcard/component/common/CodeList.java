@@ -1,5 +1,6 @@
 package com.examcard.component.common;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
@@ -10,25 +11,25 @@ import lombok.Getter;
 public class CodeList {
 
 	@Getter
-	private Map<String, String> setaiFamily;
+	private Map<String, String> setaiFamily = new HashMap<>();
 
 	@Getter
-	private Map<String, String> setaiStatus;
+	private Map<String, String> setaiStatus = new HashMap<>();
 
 	@Getter
-	private Map<String, String> setaiLoan;
+	private Map<String, String> setaiLoan = new HashMap<>();
 
 	@Getter
-	private Map<String, String> employmentStatus;
+	private Map<String, String> employmentStatus = new HashMap<>();
 
 	@Getter
-	private Map<String, String> companyIndustryType;
+	private Map<String, String> companyIndustryType = new HashMap<>();
 
 	@Getter
-	private Map<String, String> applicationStatus;
+	private Map<String, String> applicationStatus = new HashMap<>();
 
 	@Getter
-	private Map<String, String> applicationStatusCr;
+	private Map<String, String> applicationStatusCr = new HashMap<>();
 
 	public CodeList() {
 		setaiFamily.put("", "");

@@ -10,5 +10,12 @@ target/
 *.container
 *.name
 settings.json
+gradle/
+gradlew
+gradlew.bat
+.gradle/
 /ファイル/
 /bin/
+logs/
+/build/
+/classes/

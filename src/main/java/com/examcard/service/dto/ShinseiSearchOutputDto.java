@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class ShinseiSearchOutputDto {
-	
+
 	private Integer pageNo;
 	private Integer pageCount;
 	private Integer pageSize;
@@ -19,5 +19,5 @@ public class ShinseiSearchOutputDto {
 	private Map<String, String> setaiLoan;
 	private Map<String, String> employmentStatus;
 	private Map<String, String> companyIndustryType;
-	private List<ShinseiDto> customerApplicationDtoList;
+	private List<ShinseiDto> shinseiDtoList;
 }

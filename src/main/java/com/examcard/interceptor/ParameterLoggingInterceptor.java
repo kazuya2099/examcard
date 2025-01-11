@@ -16,12 +16,13 @@ import org.springframework.web.context.request.WebRequestInterceptor;
 public class ParameterLoggingInterceptor implements WebRequestInterceptor {
 
 	private static final Log logger = LogFactory.getLog(ParameterLoggingInterceptor.class);
-	
+
+	@SuppressWarnings("null")
 	@Override
 	public void preHandle(WebRequest paramWebRequest) {
 		List<String> params = new ArrayList<>();
 		Map<String, String[]> parameterMap = paramWebRequest.getParameterMap();
-		for(Entry<String, String[]> entry : parameterMap.entrySet()) {
+		for (Entry<String, String[]> entry : parameterMap.entrySet()) {
 			String[] values = entry.getValue();
 			StringJoiner join = new StringJoiner(",");
 			if (values != null) {
@@ -29,17 +30,21 @@ public class ParameterLoggingInterceptor implements WebRequestInterceptor {
 			}
 			params.add(entry.getKey() + "=" + join.toString());
 		}
-		
+
 		StringJoiner join = new StringJoiner(", ", "[", "]");
-		params.forEach(e -> join.add(e));
+		params.forEach(join::add);
 		logger.info(join.toString());
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public void postHandle(WebRequest paramWebRequest, ModelMap paramModelMap) throws Exception {
+		// 未使用
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public void afterCompletion(WebRequest paramWebRequest, Exception paramException) throws Exception {
+		// 未使用
 	}
 }

@@ -12,21 +12,25 @@ import org.springframework.web.method.HandlerMethod;
 public class TraceLoggingInterceptor implements WebRequestInterceptor {
 
 	private static final Log logger = LogFactory.getLog(TraceLoggingInterceptor.class);
-	
+
+	@SuppressWarnings("null")
 	@Override
 	public void preHandle(WebRequest paramWebRequest) throws Exception {
 		String methodName = getMethodName(paramWebRequest);
 		logger.info(methodName + " : 開始");
 	}
-	
+
+	@SuppressWarnings("null")
 	@Override
 	public void postHandle(WebRequest paramWebRequest, ModelMap paramModelMap) throws Exception {
 		String methodName = getMethodName(paramWebRequest);
 		logger.info(methodName + " : 終了");
 	}
-	
+
+	@SuppressWarnings("null")
 	@Override
 	public void afterCompletion(WebRequest paramWebRequest, Exception paramException) throws Exception {
+		// unused.
 	}
 
 	private String getMethodName(Object handler) {

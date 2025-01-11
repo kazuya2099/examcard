@@ -24,7 +24,7 @@ public enum SetaiFamily {
 	
 	public SetaiFamily from(String code) {
 		for (SetaiFamily e : SetaiFamily.values()) {
-			if (this.code.equals(e.code)) {
+			if (code.equals(e.code)) {
 				return e;
 			}
 		}

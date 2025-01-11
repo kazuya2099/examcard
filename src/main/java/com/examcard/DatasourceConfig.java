@@ -17,17 +17,20 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.examcard.constant.ErrorCode;
+import com.examcard.exception.SystemException;
+
 @Configuration
 @EnableTransactionManagement
-@MapperScan("com.examcard.repository")
+@MapperScan("com.examcard.mapper")
 public class DatasourceConfig {
 
 	@Bean
 	DataSource dataSource() {
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-		driverManagerDataSource.setDriverClassName(oracle.jdbc.driver.OracleDriver.class.getName());
-		driverManagerDataSource.setUrl("jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=DESKTOP-ITP21F1)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=EXAMCARD)))");
-		driverManagerDataSource.setUsername("EXAMCARD");
+		driverManagerDataSource.setDriverClassName(com.mysql.jdbc.Driver.class.getName());
+		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/examcard?useSSL=false");
+		driverManagerDataSource.setUsername("examcard");
 		driverManagerDataSource.setPassword("password");
 		return driverManagerDataSource;
 	}
@@ -48,7 +51,7 @@ public class DatasourceConfig {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource());
 		bean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
-		bean.setMapperLocations(resolver.getResources("classpath:sql/**/*.xml"));
+		bean.setMapperLocations(resolver.getResources("classpath:com/examcard/**/*.xml"));
 		return bean;
 	}
 
@@ -58,7 +61,7 @@ public class DatasourceConfig {
 		try {
 			bean = new SqlSessionTemplate(sessionFactory().getObject());
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new SystemException(ErrorCode.E500000, e);
 		}
 		return bean;
 	}
