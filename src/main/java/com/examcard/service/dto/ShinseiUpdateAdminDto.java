@@ -15,13 +15,13 @@ public class ShinseiUpdateAdminDto {
 	@NotBlank
 	@Pattern(regexp = "[0-9]+", message = "{validation.hankaku.number.message}")
 	private String id;
-	
+
 	@NotBlank
 	private String applicationStatus;
 
-	@Length(max=255)
+	@Length(max = 255)
 	private String applicationComment;
-	
+
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date updateDate;
 }

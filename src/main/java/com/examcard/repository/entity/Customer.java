@@ -1,19 +1,18 @@
 package com.examcard.repository.entity;
-<<<<<<<< HEAD:src/main/java/com/examcard/repository/entity/ShinseiSerchParamEntity.java
 
 import java.io.Serializable;
-========
->>>>>>>> aa7b932926e2b65ed5b5efc11b30a0f2a66287bd:src/main/java/com/examcard/repository/entity/CustomerApplicationSearchParam.java
+import java.util.Date;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=true)
-public class ShinseiSerchParamEntity extends BaseEntity implements Serializable {
+public class CustomerEntity extends BaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private String id;
 	private String firstname;
 	private String lastname;
 	private String lastnameKana;
@@ -54,8 +53,13 @@ public class ShinseiSerchParamEntity extends BaseEntity implements Serializable 
 	private String companyDepartment;
 	private String companyIndustryType;
 	private String companyWorkYears;
-	private String applicationStatus;
-	private String applicationComment;
-	private Integer start;
-	private Integer end;
+	private String role;
+	private String password;
+	private Date createDate;
+	private String createUser;
+	private Date updateDate;
+	private String updateUser;
+	private Date deleteDate;
+	private String deleteUser;
+	private String deleteFlag;
 }

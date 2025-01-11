@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class ShinseiSearchOutputDto {
-	
+
 	private Integer pageNo;
 	private Integer pageCount;
 	private Integer pageSize;
