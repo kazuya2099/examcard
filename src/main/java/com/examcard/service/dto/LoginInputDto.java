@@ -3,8 +3,8 @@ package com.examcard.service.dto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- * ログインインプットDTO
+/* 
+* ログインインプットDTO
  * 
  * @author Masanao Hamada
  */
