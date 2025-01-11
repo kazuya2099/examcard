@@ -15,20 +15,7 @@ rewrite {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url 'https://plugins.gradle.org/m2/' } 
-}
-
-eclipse {
-  classpath {
-    defaultOutputDir = file('build/classes')
-    file.whenMerged { classpath ->
-      classpath.entries.findAll { entry ->
-        if (entry.kind == 'src' && entry.hasProperty('output')) {
-          entry.output = 'build/classes'
-        }
-      }
-    }
-  }
+    maven { url = 'https://plugins.gradle.org/m2/' } 
 }
 
 java {
@@ -54,7 +41,8 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:5.3.1'
     testImplementation 'junit:junit:4.13.2'
     compileOnly 'org.eclipse.jdt.core.compiler:ecj:4.6.1'
-    compileOnly 'org.projectlombok:lombok:1.18.28'
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
 }
 
 group = 'com.examcard'
@@ -63,6 +51,7 @@ description = 'examcard'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+    options.annotationProcessorPath = configurations.annotationProcessor
 }
 
 tasks.withType(ProcessResources) {

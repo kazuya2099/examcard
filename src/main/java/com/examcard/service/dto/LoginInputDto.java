@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.val;
 
 /**
  * ログインインプットDTO
@@ -18,20 +17,4 @@ public class LoginInputDto extends BaseDto implements Serializable {
 	private String mail;
 	/* パスワード */
 	private String password;
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 }
