@@ -27,7 +27,7 @@ public class Application implements WebMvcConfigurer {
 		return messageSource;
 	}
 
-	@Bean(name="localValidatorFactoryBean")
+	@Bean(name = "localValidatorFactoryBean")
 	@Override
 	public Validator getValidator() {
 		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
@@ -36,9 +36,9 @@ public class Application implements WebMvcConfigurer {
 	}
 
 	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		String[] mappings = {"/resources/**", "/css/**", "/javascript/**"};
-		String[] locations = {"/resources/", "/css/", "/javascript/"};
+	public void addResourceHandlers(@SuppressWarnings("null") ResourceHandlerRegistry registry) {
+		String[] mappings = { "/resources/**", "/css/**", "/javascript/**" };
+		String[] locations = { "/resources/", "/css/", "/javascript/" };
 		registry.addResourceHandler(mappings).addResourceLocations(locations);
 	}
 }
