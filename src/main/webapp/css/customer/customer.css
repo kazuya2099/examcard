@@ -1,0 +1,81 @@
+.customer-search {
+	mergin: 10px;
+	padding: 10px;
+	background-color: #ffffff;
+}
+
+.customer-search-title {
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 1px solid #a0a0a0;
+}
+.customer-search-body {
+	margin-top: 10px;
+}
+.customer-search-body-item {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.customer-search-body-item table {
+	width: 100%;
+	margin-bottom: 5px;
+	font-size: 14px;
+}
+.customer-search-body-item th {
+	width: 10%;
+	border: 1px solid #000000;
+	padding: 5px;
+}
+.customer-search-body-item td {
+	width: 20%;
+	border: 1px solid #000000;
+	padding: 5px;
+}
+.customer-search-result table {
+	width: 100%;
+	font-size: 14px;
+	border: 1px solid #000000;
+}
+.customer-search-result table th {
+	border: 1px solid #000000;
+	background-color: #eeeeee;
+	padding: 3px;
+}
+.customer-search-result table td {
+	border: 1px solid #000000;
+	padding: 3px;
+}
+.customer-info {
+	width:100%;
+}
+.customer-info th {
+	padding: 5px;
+	width: 30%;
+}
+.customer-info td {
+	width: auto;
+}
+.customer-info-office {
+	width:100%;
+}
+.customer-info-office th {
+	padding: 5px;
+	width:30%;
+}
+.customer-info-office td {
+	width: auto;
+}
+.customer-info-body-status {
+	border: 1px solid #ee0000;
+	padding: 3px;
+	font-size: 14px;
+	font-weight: bold;
+	background-color: #ffffff;
+}
+.customer-info-body-comment {
+	border: 1px solid #eeee00;
+	padding: 3px;
+	font-size: 14px;
+	font-weight: bold;
+	background-color: #ffffff;
+}
