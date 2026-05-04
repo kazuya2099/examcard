@@ -15,8 +15,13 @@ gradlew
 gradlew.bat
 .gradle/
 .env
+.DS_Store
+*.terraform/
+*.terraform.lock.hcl
+*terraform.tfvars
 /bin/
 logs/
 /build/
 /classes/
-/infrastructure/terraform/envs/dev/terraform.tfvars
+.idea
+.settings
