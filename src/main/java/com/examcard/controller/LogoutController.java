@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LogoutController {
 
-	@GetMapping(value = {"/complete"})
-	public String index(Model model) {
-		return "logout/index";
-	}
+  @GetMapping(value = {"/complete"})
+  public String index(Model model) {
+    return "logout/index";
+  }
 }
