@@ -13,7 +13,7 @@ server:
       file-date-format: .yyyyMMdd
       max-days: 30
       rename-on-rotate: true
-    additional-tld-skip-patterns:   "oraclepki.jar, osdt_core.jar, osdt_cert.jar"
+    additional-tld-skip-patterns: "oraclepki.jar, osdt_core.jar, osdt_cert.jar"
 
 spring:
   datasource:
@@ -21,6 +21,9 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
+
+mybatis:
+  mapper-locations: classpath:/com/examcard/mapper/*.xml
 
 logging:
   level:

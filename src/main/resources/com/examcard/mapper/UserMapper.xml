@@ -2,30 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.examcard.mapper.UserMapper">
 
-	<select id="selectUser" parameterType="java.lang.String" resultType="com.examcard.repository.entity.UserEntity">
-		SELECT
-			U.ID,
-			U.SEI,
-			U.MEI,
-			U.SEI_KANA,
-			U.MEI_KANA,
-			U.MAIL,
-			U.TEL,
-			U.ADDRESS1,
-			U.ADDRESS2,
-			U.ADDRESS3,
-			U.ADDRESS4
-		FROM
-			USER U
-		INNER JOIN
-			LOGIN L
-		ON
-			U.ID = L.ID
-		WHERE
-			U.MAIL = #{mail}
-			AND L.PASSWORD = #{password}
-			AND U.DELETE_FLAG = '0'
-			AND L.DELETE_FLAG = '0'
+	<select id="selectUser" resultType="com.examcard.repository.entity.UserEntity">
+		select
+			c.id,
+			c.sei,
+			c.mei,
+			c.sei_kana,
+			c.mei_kana,
+			c.mail,
+			c.tel,
+			c.address1,
+			c.address2,
+			c.address3,
+			c.address4
+		from
+			customer c
+		inner join
+			login l
+		on
+			c.id = l.id
+		where
+			c.mail = #{mail}
+			and l.password = #{password}
+			and c.delete_flag = '0'
+			and l.delete_flag = '0'
 	</select>
 
 	<select id="selectUserById" parameterType="java.lang.String" resultType="com.examcard.repository.entity.UserEntity">

@@ -4,6 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +30,7 @@ public class LoginContoller {
 		this.loginService = loginService;
 	}
 
-	@GetMapping(value = {"/login"})
+	@PostMapping(value = {"/login"})
 	public LoginContollerOutputDto index(@RequestBody @Validated LoginContollerInputDto loginContollerInputDto, BindingResult result) {
 		if (result.hasErrors()) {
 			throw new BusinessException(ErrorCode.W400000, result.getAllErrors(), this.getClass().getName());
