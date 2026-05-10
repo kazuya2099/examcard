@@ -1,8 +1,9 @@
 package com.examcard.mapper;
 
-import com.examcard.repository.entity.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import com.examcard.repository.entity.UserEntity;
 
 /** ユーザーマスタマッパークラス */
 @Mapper

@@ -9,14 +9,11 @@ plugins {
 spotless {
     java {
         googleJavaFormat() // Googleスタイルを適用
+        importOrder('java', 'javax', 'org', 'com', '')
         removeUnusedImports() // 未使用インポートの削除
         trimTrailingWhitespace() // 行末の空白削除
         endWithNewline() // ファイル末尾に改行を追加
     }
-}
-
-tasks.withType(JavaCompile) {
-    dependsOn 'spotlessApply'
 }
 
 repositories {

@@ -1,9 +1,10 @@
 package com.examcard.repository.impl;
 
+import org.springframework.stereotype.Repository;
+
 import com.examcard.mapper.UserMapper;
 import com.examcard.repository.UserRepository;
 import com.examcard.repository.entity.UserEntity;
-import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {

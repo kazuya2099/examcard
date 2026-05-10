@@ -1,7 +1,9 @@
 package com.examcard.controller.dto;
 
-import com.examcard.constant.ErrorCode;
 import java.io.Serializable;
+
+import com.examcard.constant.ErrorCode;
+
 import lombok.Data;
 
 /**

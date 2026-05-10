@@ -1,5 +1,12 @@
 package com.examcard.controller;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.examcard.constant.ErrorCode;
 import com.examcard.controller.dto.LoginContollerInputDto;
 import com.examcard.controller.dto.LoginContollerOutputDto;
@@ -7,12 +14,6 @@ import com.examcard.exception.BusinessException;
 import com.examcard.service.LoginService;
 import com.examcard.service.dto.LoginInputDto;
 import com.examcard.service.dto.LoginOutputDto;
-import org.springframework.beans.BeanUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * ログインコントローラー.

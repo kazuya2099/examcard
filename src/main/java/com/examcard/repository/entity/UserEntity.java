@@ -1,6 +1,7 @@
 package com.examcard.repository.entity;
 
 import java.io.Serializable;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
