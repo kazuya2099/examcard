@@ -10,10 +10,6 @@ public class UserRepositoryImpl implements UserRepository {
 
   private UserMapper userMapper;
 
-  public UserRepositoryImpl(UserMapper userMapper) {
-    this.userMapper = userMapper;
-  }
-
   public UserEntity selectUser(String mail, String password) {
     return userMapper.selectUser(mail, password);
   }

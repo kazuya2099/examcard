@@ -13,8 +13,6 @@ public class UserEntity extends BaseEntity implements Serializable {
   private String id;
   private String sei;
   private String mei;
-  private String seiKana;
-  private String meiKana;
   private String mail;
   private String tel;
   private String address1;

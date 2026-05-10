@@ -7,14 +7,12 @@
 			c.id,
 			c.sei,
 			c.mei,
-			c.sei_kana,
-			c.mei_kana,
 			c.mail,
 			c.tel,
 			c.address1,
 			c.address2,
 			c.address3,
-			c.address4
+        c.address4
 		from
 			customer c
 		inner join
@@ -24,22 +22,20 @@
 		where
 			c.mail = #{mail}
 			and l.password = #{password}
-			and c.delete_flag = '0'
-			and l.delete_flag = '0'
+			and c.is_deleted = false
+			and l.is_deleted = false
 	</select>
 
 	<select id="selectUserById" parameterType="java.lang.String" resultType="com.examcard.repository.entity.UserEntity">
 		SELECT
-			U.ID,
-			U.SEI,
-			U.MEI,
-			U.SEI_KANA,
-			U.MEI_KANA,
-			U.MAIL
+        c.ID,
+        c.SEI,
+        c.MEI,
+        c.MAIL
 		FROM
-			USER U
+        customer c
 		WHERE
-			U.ID = #{id}
-			AND U.DELETE_FLAG = '0'
+        c.ID = #{id}
+			AND c.is_deleted = false
 	</select>
 </mapper>

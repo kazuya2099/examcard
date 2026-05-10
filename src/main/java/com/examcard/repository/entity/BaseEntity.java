@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public abstract class BaseEntity {
-  private String deleteFlag;
-  private String createUser;
-  private String createTimestamp;
-  private String updateUser;
-  private String updateTimestamp;
-  private String deleteUser;
-  private String deleteTimestamp;
+  private String createdAt;
+  private String createdBy;
+  private String updatedAt;
+  private String updatedBy;
+  private String isDeleted;
+  private String deletedAt;
+  private String deletedBy;
 }
