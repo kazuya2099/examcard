@@ -50,6 +50,6 @@ resource "aws_iam_role_policy_attachment" "ssm_managed" {
 
 # IAM インスタンスプロファイル（EC2に紐付ける器）
 resource "aws_iam_instance_profile" "ssm_profile" {
-  name = "aws-test-dev-ssm-profile"
+  name = "${var.project}-${var.env}-ssm-profile"
   role = aws_iam_role.ssm_role.name
 }
