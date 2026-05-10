@@ -11,7 +11,8 @@
 			c.tel,
 			c.address1,
 			c.address2,
-			c.address3, c.address4
+			c.address3,
+            c.address4
 		from
 			customer c
 		inner join
